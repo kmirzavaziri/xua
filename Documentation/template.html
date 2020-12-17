@@ -5,69 +5,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="assets/css/xua-documentation.css" rel="stylesheet" type="text/css" />
     <title>%TITLE% - XUA Documentation</title>
-    <style>
-        /*   Background   */
-        body {
-            background-image: url('%BACKGROUND%');
-        }
-
-        #header {
-            background-color: %HEADER_COLOR ?? rgba(75, 82, 95, 0.53)%;
-        }
-
-        #main h1.h1,
-        ul#menu li.menu-item,
-        div.button,
-        td.logical_tab,
-        .ui-state-active {
-            background-color: %PRIMARY_COLOR ?? #91a1d1%;
-            color: %SECONDARY_COLOR ?? #000%;
-        }
-
-        ::-moz-selection { /* Code for Firefox */
-            color: %SECONDARY_COLOR ?? #000%;
-            background: %PRIMARY_COLOR ?? #91a1d1%;
-        }
-
-        ::selection {
-            color: %SECONDARY_COLOR ?? #000%;
-            background: %PRIMARY_COLOR ?? #91a1d1%;
-        }
-        #header a {
-            color: %SECONDARY_COLOR ?? #000%;
-        }
-
-        #header .menu-item:hover {
-            background-color: %SECONDARY_COLOR ?? #000%;
-        }
-        #header .menu-item:hover a {
-            color: %PRIMARY_COLOR ?? #91a1d1%;
-        }
-
-        #main h2.h2,
-        #main h3.h3,
-        #main h4.h4,
-        #main h5.h5,
-        #main h6.h6 {
-            color: %PRIMARY_COLOR ?? #91a1d1%;
-        }
-
-        a:link {
-            color: %PRIMARY_COLOR ?? #91a1d1%;
-        }
-
-        a:visited {
-            color: %PRIMARY_COLOR ?? #91a1d1%;
-        }
-
-        a:active {
-            color: %PRIMARY_COLOR ?? #91a1d1%;
-        }
-
-        a:hover {
-            color: %A_HOVER_COLOR ?? #000%;
-        }
-    </style>
 </head>
 
 <body>
@@ -77,14 +14,17 @@
         <div id="header">
             <div class='booktitleinheader'><a href='index.html'>XUA Documentation</a></div>
             <ul id='menu'>
-                <li class='menu-item'><a href='toc.html'>Table of Contents</a></li>
-                <li class='menu-item'><a href='architecture.html'>Architecture</a></li>
+                <li class='menu-item'><a href='TOC.html'>Table of Contents</a></li>
+                <li class='menu-item'><a href='Architecture.html'>Architecture</a></li>
             </ul>
         </div>
 
         <div id="main">
 
-            <h1 class="libtitle">%TITLE%<span class="subtitle">%SUBTITLE%</span></h1>
+            <h1 class="libtitle">
+                %TITLE%
+                <span class="subtitle">%SUBTITLE%</span>
+            </h1>
 
             XUA-DOC-HOLDER
 
