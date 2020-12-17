@@ -1,0 +1,92 @@
+# XUA Documentation - Preface
+# XUA Tools Development Team
+# Winter 1399
+
+# HTML Configurations
+    # html.TITLE = "Units"
+    # html.SUBTITLE = ""
+
+# XUADOC Configurations
+    # xuadoc.renderComments = "doc"
+    # xuadoc.renderCodes = "pure"
+
+# -- #########################################
+# # XUA Server
+
+# ## Universal Resources Pool
+
+# ## Interfaces
+
+# ## Entities
+
+# ## Methods
+
+# ## Super Types
+
+# ## PHP Service Classes
+
+# ## Resource Files
+
+# ### Public Resource Files
+
+# ### Private Resource Files
+
+# ## XUA Server Generated Units
+
+# ### Route Detection Unit
+
+# ### Universal Resources Pool Interface (URPI)
+
+# ### XUA Exception Handler
+
+# ### Template Engine
+
+# -- #########################################
+# # Marshal Library
+
+# ## Local Service Classes
+
+# ## Virtual Resource Pool
+
+# ### Entity Interfaces
+
+# ### Method Interfaces
+
+# ## Marshal Library Generated Units
+
+# ### Marshal/Unmarshal Unit
+
+# ### Http Connection Unit
+
+# -- #########################################
+# # Documentations
+
+# ## Service Classes Documentations
+
+# ## Super Types Documentations
+
+# ## Entities Documentations
+
+# ## Entities Graph
+
+# ## Methods Documentations
+
+# ## Book
+
+# -- #########################################
+# # Foreign Units
+
+# ## System Resources
+
+# ## Libraries
+
+# ## 3rd Party Apps
+
+# ## Database and Cache Servers
+
+# ## Web Browser
+
+# ## Native Client Codes
+
+
+
