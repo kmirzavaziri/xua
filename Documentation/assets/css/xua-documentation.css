@@ -1,3 +1,5 @@
+/* @TODO Clean this CSS file */
+
 /* ###################################################################### */
 /* General */
 body {
@@ -897,4 +899,69 @@ body.sf_home #header {
 
 body.sf_home #main_home {
     background-color: transparent;
+}
+
+/*   Background   */
+body {
+    background-image: url('../images/bg.jpg');
+}
+
+#header {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#main h1.h1,
+ul#menu li.menu-item,
+div.button,
+td.logical_tab,
+.ui-state-active {
+    background-color: #1F473C;
+    color: #fff;
+}
+
+::-moz-selection {
+    /* Code for Firefox */
+    color: #fff;
+    background: #1F473C;
+}
+
+::selection {
+    color: #fff;
+    background: #1F473C;
+}
+
+#header a {
+    color: #fff;
+}
+
+#header .menu-item:hover {
+    background-color: #fff;
+}
+
+#header .menu-item:hover a {
+    color: #1F473C;
+}
+
+#main h2.h2,
+#main h3.h3,
+#main h4.h4,
+#main h5.h5,
+#main h6.h6 {
+    color: #1F473C;
+}
+
+a:link {
+    color: #1F473C;
+}
+
+a:visited {
+    color: #1F473C;
+}
+
+a:active {
+    color: #1F473C;
+}
+
+a:hover {
+    color: #001F00;
 }

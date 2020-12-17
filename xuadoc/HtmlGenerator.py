@@ -153,45 +153,47 @@ class HtmlGenerator:
             )
 
     def _html(self, statement):
+        statement = statement.strip()
+
         # h6
         statement = re.sub(
-            r"######(.*)",
-            r"<h6 class='h6'>\1</h6>",
+            r"^######(.*)",
+            lambda x : "<a href='#" + x.group(1).strip().replace(' ', '+') + "'><h6 class='h6' id='" + x.group(1).strip().replace(' ', '+') + "'>" + x.group(1) + "</h6></a>",
             statement
         )
 
         # h5
         statement = re.sub(
-            r"#####(.*)",
-            r"<h5 class='h5'>\1</h5>",
+            r"^#####(.*)",
+            lambda x : "<a href='#" + x.group(1).strip().replace(' ', '+') + "'><h5 class='h5' id='" + x.group(1).strip().replace(' ', '+') + "'>" + x.group(1) + "</h5></a>",
             statement
         )
 
         # h4
         statement = re.sub(
-            r"####(.*)",
-            r"<h4 class='h4'>\1</h4>",
+            r"^####(.*)",
+            lambda x : "<a href='#" + x.group(1).strip().replace(' ', '+') + "'><h4 class='h4' id='" + x.group(1).strip().replace(' ', '+') + "'>" + x.group(1) + "</h4></a>",
             statement
         )
 
         # h3
         statement = re.sub(
-            r"###(.*)",
-            r"<h3 class='h3'>\1</h3>",
+            r"^###(.*)",
+            lambda x : "<a href='#" + x.group(1).strip().replace(' ', '+') + "'><h3 class='h3' id='" + x.group(1).strip().replace(' ', '+') + "'>" + x.group(1) + "</h3></a>",
             statement
         )
 
         # h2
         statement = re.sub(
-            r"##(.*)",
-            r"<h2 class='h2'>\1</h2>",
+            r"^##(.*)",
+            lambda x : "<a href='#" + x.group(1).strip().replace(' ', '+') + "'><h2 class='h2' id='" + x.group(1).strip().replace(' ', '+') + "'>" + x.group(1) + "</h2></a>",
             statement
         )
 
         # h1
         statement = re.sub(
-            r"#(.*)",
-            r"<h1 class='h1'>\1</h1>",
+            r"^#(.*)",
+            lambda x : "<a href='#" + x.group(1).strip().replace(' ', '+') + "'><h1 class='h1' id='" + x.group(1).strip().replace(' ', '+') + "'>" + x.group(1) + "</h1></a>",
             statement
         )
 
