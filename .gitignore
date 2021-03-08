@@ -1,2 +1,2 @@
-xuadoc/__pycache__/HtmlGenerator.cpython-38.pyc
-xuadoc/__pycache__/ReMatcher.cpython-38.pyc
+*.pyc
+*.pyo

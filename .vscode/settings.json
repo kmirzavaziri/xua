@@ -4,5 +4,13 @@
         "mirzavaziri",
         "unmarshal",
         "urpi"
-    ]
+    ],
+    "emeraldwalk.runonsave": {
+        "commands": [
+            {
+                "match": "\\.xua$",
+                "cmd": "/usr/bin/python3 /home/kamyar/VscProjects/xua/cli/xua.py build ${file}"
+            }
+        ]
+    }
 }

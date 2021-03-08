@@ -1,0 +1,30 @@
+{
+    "settings": {
+        "server": {
+            "php": {
+                "destination-dir": "public_html",
+                "quick-build": true
+            }
+        },
+        "marshal": {
+            "dart": {
+                "destination-dir": "marshal/dart",
+                "quick-build": false
+            }
+        },
+        "doc": {
+            "latex": {
+                "destination-dir": "latex",
+                "quick-build": false,
+                "default-template": "@default",
+                "build-pdf": true
+            },
+            "html": {
+                "destination-dir": "html",
+                "quick-build": true,
+                "default-template": "@default",
+                "build-pdf": false
+            }
+        }
+    }
+}

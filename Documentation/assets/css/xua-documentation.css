@@ -363,6 +363,12 @@ pre {
     color: #1e1e1e;
 }
 
+code {
+    background-color: #efefef;
+    color: #1e1e1e;
+    padding: 3px;
+}
+
 pre code { 
     font-family: monospace;
     line-height: 17px;
@@ -933,7 +939,7 @@ td.logical_tab,
     background-color: #fff;
 }
 
-#header .menu-item:hover a, #index_content .button:hover a {
+#header .menu-item:hover a, #index_content .button:hover {
     color: #1F473C;
 }
 

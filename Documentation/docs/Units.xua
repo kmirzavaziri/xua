@@ -2,13 +2,13 @@
 # XUA Tools Development Team
 # Winter 1399
 
-# HTML Configurations
-    # html.TITLE = "Units"
-    # html.SUBTITLE = ""
+# Doc Constants
+    # @python doc.constants.TITLE = "Units;"
+    # @python doc.constants.SUBTITLE = "The Fundamentals"
 
-# XUADOC Configurations
-    # xuadoc.renderComments = "doc"
-    # xuadoc.renderCodes = "pure"
+# Doc Configurations
+    # @python doc.renderComments = "doc"
+    # @python doc.renderCodes = "pure"
 
 # -- #########################################
 # # XUA Server

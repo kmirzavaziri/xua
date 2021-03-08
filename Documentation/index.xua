@@ -1,0 +1,9 @@
+# XUA Documentation
+# Kamyar Mirzavaziri
+# Winter 1399
+
+# Doc Constants
+    # @python doc.constants.TITLE = "XUA Documentation"
+
+# Doc Configurations
+    # @python doc.htmlTemplate = "templates/index.html"

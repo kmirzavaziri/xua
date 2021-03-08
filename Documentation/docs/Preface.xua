@@ -1,19 +1,19 @@
 # XUA Documentation - Preface
-# XUA Tools Development Team
+# Kamyar Mirzavaziri
 # Winter 1399
 
-# HTML Configurations
-    # html.TITLE = "Preface"
-    # html.SUBTITLE = "An Introduction To XUA"
+# Doc Constants
+    # @python doc.constants.TITLE = "Preface;"
+    # @python doc.constants.SUBTITLE = "An Introduction To XUA"
 
-# XUADOC Configurations
-    # xuadoc.renderComments = "doc"
-    # xuadoc.renderCodes = "pure"
+# Doc Configurations
+    # @python doc.renderComments = "doc"
+    # @python doc.renderCodes = "pure"
 
 # -- #########################################
 # # Introduction
 
-# XUA is shortened form of Xuarazmi, named after [al-Khwarizmi](https://duckduckgo.com), 
+# XUA is shortened form of Xuarazmi, named after [al-Khwarizmi](https://en.wikipedia.org/wiki/Muhammad_ibn_Musa_al-Khwarizmi), 
 # Persian mathematician and poet, formerly Latinized as Algorithmi (and yes that's where 
 # the word _algorithm_ comes from).
 
@@ -41,7 +41,7 @@
 
 # - MySQL Server, is recommended for test and debug on local server.
 
-# - VSCode, is recommended with XUA extension installed to program in XUA language. Although it's not
+# - VSCode, is recommended with XUA extension installed to code in XUA language. Although it's not
 # a necessity, but the extension will help with code correction and autocomplete as well as making the build process easier. 
 
 # ## Getting Started
@@ -58,58 +58,19 @@
 # ### Hello World!
 
 # To create a new project, go to a directory you want to create the project and run
-#    xua new project
+#    xua new project PROJECT_NAME
 
-# Now build the template project you just created
+# Now build the template project you just created, run,
 #    xua build
+# or alternatively, click on build button that appears in VSCode after installing the plugin.
 
 # Set up a PHP server on the build destination location (`public_html` by default)
 #    cd public_html
 #    php -S localhost:8000
+# or alternatively, click on run server button that appears in VSCode after installing the plugin.
 
 # Now you should be able to see the _Hello World!_ page by visiting the [localhost:8000](http://localhost:8000/) page on
 # your browser.
-
-# ### Cheat Sheet
-
-# #### Templates
-
-# Create a new XUA project in the current directory.
-#    xua new project
-
-# Create a new entity file in current directory's XUA project.
-#    xua new entity ENTITY-NAME
-
-# Create a new method file in current directory's XUA project.
-#    xua new method METHOD-NAME
-
-# Create a new super file in current directory's XUA project.
-#    xua new super SUPER-NAME
-
-# Create a new service file for a specific language in current directory's XUA project.
-#    xua new service SERVICE-NAME [-l LANGUAGE]
-
-# Create a new interface file in current directory's XUA project.
-#    xua new interface "ROUTE-SPECIFICATION"
-
-# #### Build
-
-# Quickly build server project (only build changes).
-#    xua build quick [-d DESTINATION]
-
-# Build server project (completely).
-#    xua build server [-d DESTINATION]
-# @TODO what's the difference?
-
-# Build Marshal Library for a specific language.
-#    xua build marshal [-d DESTINATION] [-l LANGUAGE]
-
-# Build documentations for the current directory.
-#    xua build doc [-d DESTINATION] [-t TEMPLATE_FILE]
-
-# Build a complete set of server project, Marshal Library, and documentations. (build arguments can be 
-# specified in config.xml)
-#    xua build
 
 # -- #########################################
 # # Architecture
@@ -118,7 +79,7 @@
 # project (shown as _A XUA Server_), a front-end library (shown as _A Marshal Library_), and a complete
 # set of documentations (shown as _Documentations_).
 
-# ![XUA Architecture](assets/images/XUAM.png)
+# ![XUA Architecture]({{ XUA-ROOT }}/assets/images/XUAM.png)
 
 # As shown above, there are only few units of the generated result that need explicit specification by
 # programmer (marked blue), a XUA project is simply a set of files specifying these units. This leads us to
@@ -137,23 +98,26 @@
 #    │  ├─ Private
 #    │  └─ └─ (empty by default)
 #    ├─ Services
-#    │  ├─ Dart
-#    │  │  └─ (xua services)
-#    │  ├─ PHP
-#    │  │  └─ (xua services)
-#    │  ├─ Java
-#    │  │  └─ (xua services)
-#    │  ├─ JavaScript
-#    │  │  └─ (xua services)
-#    │  ├─ Kotlin
-#    │  │  └─ (xua services)
-#    │  ├─ Objective-C
-#    │  │  └─ (xua services)
-#    │  ├─ Swift
-#    │  └─ └─ (xua services)
+#    │  ├─ Server
+#    │  │  ├─ PHP
+#    │  │  └─ └─ (xua services)
+#    │  ├─ Marshal
+#    │  │  ├─ Dart
+#    │  │  │  └─ (xua services)
+#    │  │  ├─ Java
+#    │  │  │  └─ (xua services)
+#    │  │  ├─ JavaScript
+#    │  │  │  └─ (xua services)
+#    │  │  ├─ Kotlin
+#    │  │  │  └─ (xua services)
+#    │  │  ├─ Objective-C
+#    │  │  │  └─ (xua services)
+#    │  │  ├─ Swift
+#    │  └─ └─ └─ (xua services)
 #    ├─ Supers
 #    │  └─ (basic supers)
 #    └─ config.xml
 
 # In this documentation, we try to cover all of these units. By visiting the page [Architecture](Architecture.html)
 # and clicking on a unit, you'll be redirected to documentation section of that unit.
+# -- The Units documentation mainly contains information about why an object exist and what does it do. For details on how to create a XUA object, syntax, etc. click on the corresponding directory in the project structure above.

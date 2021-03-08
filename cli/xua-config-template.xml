@@ -1,0 +1,23 @@
+<!--
+    XUA Configuration Template
+    Kamyar Mirzavaziri
+    1399/11/24
+-->
+<xua title="Untitled">
+    <settings>
+        <doc autogen=false>
+            <chapters>
+                <chapter src="Preface.xua"            />
+                <chapter src="Supers.xua"             />
+                <chapter src="PredefinedSupers.xua"   />
+                <chapter src="Entities.xua"           />
+                <chapter src="Methods.xua"            />
+                <chapter src="Services.xua"           />
+                <chapter src="PredefinedServices.xua" />
+                <chapter src="Interfaces.xua"         />
+                <chapter src="Documentations.xua"     />
+                <chapter src="Architecture.xua"       html-template="architecture-template.html" />
+            </chapters>
+        </doc>
+    </settings>
+</xua>

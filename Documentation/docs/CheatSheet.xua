@@ -1,0 +1,49 @@
+# XUA Documentation - Cheat Sheet
+# Kamyar Mirzavaziri
+# Winter 1399
+
+# Doc Constants
+    # @python doc.constants.TITLE = "Cheat Sheet;"
+    # @python doc.constants.SUBTITLE = "Pure and Simple"
+
+# Doc Configurations
+    # @python doc.renderComments = "doc"
+    # @python doc.renderCodes = "pure"
+
+# -- #########################################
+# # Templates
+
+# Create a new XUA project in the current directory.
+#    xua new project PROJECT_NAME
+
+# Create a new entity file in current directory's XUA project.
+#    xua new entity ENTITY_NAME
+
+# Create a new method file in current directory's XUA project.
+#    xua new method METHOD_NAME
+
+# Create a new super file in current directory's XUA project.
+#    xua new super SUPER_NAME
+
+# Create a new service file for a specific language in current directory's XUA project.
+#    xua new service SERVICE-NAME [-l LANGUAGE]
+# where `LANGUAGE` can be Dart, PHP, Java, JavaScript, Kotlin, Objective-C, or Swift.
+
+# Create a new interface file in current directory's XUA project.
+#    xua new interface "ROUTE-SPECIFICATION"
+
+# # Build
+
+# In the following commands, `NAME` can be a file name, a directory name, or can be empty.
+
+# Build specific project.
+#    xua build PROJECT [NAME]
+# where the `PROJECT` can be `doc/latex`, `doc/html`, `server/php`, `marshal/dart`, `marshal/javascript`, etc.
+
+# Build projects that are labeled with `quick-build` in config.json.
+#    xua build quick [NAME]
+# If you have the plugin installed, when you hit the save button (`Ctrl+S`) the plugin automatically quick-builds
+# the file that is saved.
+
+# Build all projects.
+#    xua build all [NAME]

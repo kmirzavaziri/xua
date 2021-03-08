@@ -1,0 +1,14 @@
+# XUA Documentation - Architecture
+# Kamyar Mirzavaziri
+# Winter 1399
+
+# Doc Constants
+    # @python doc.constants.TITLE = "Architecture;"
+    # @python doc.constants.SUBTITLE = "The Art of"
+
+# Doc Configurations
+    # @python doc.renderComments = "doc"
+    # @python doc.renderCodes = "pure"
+    # @python doc.htmlTemplate = "templates/architecture.html"
+
+# Click on any unit to see the explanation.

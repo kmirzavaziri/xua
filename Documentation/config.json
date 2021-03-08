@@ -1,0 +1,18 @@
+{
+    "settings": {
+        "doc": {
+            "latex": {
+                "default-template": "@default",
+                "gen-pdf": true,
+                "destination-dir": "latex",
+                "quick-build": false
+            },
+            "html": {
+                "default-template": "templates/template.html",
+                "gen-pdf": false,
+                "destination-dir": "html",
+                "quick-build": true
+            }
+        }
+    }
+}
