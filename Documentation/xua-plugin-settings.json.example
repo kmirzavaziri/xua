@@ -1,0 +1,12 @@
+{
+    "deploy": {
+        "source": "public_html",
+        "destination": ""
+    },
+    "ftp": {
+        "hostname": "HOSTNAME",
+        "port": 21,
+        "username": "USERNAME",
+        "password": "PASSWORD"
+    }
+}

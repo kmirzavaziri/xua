@@ -1,6 +1,7 @@
 import re
 import os
 import shutil
+from sympy import preview
 
 
 class Doc:
@@ -134,15 +135,17 @@ class HtmlGenerator:
                         block["mode"] + "'>" + \
                         self._html(block["content"]) + "</div>"
 
+        content = self._properties.doc.content if self._properties.doc.content != '' else doc
         result = re.sub(r"\{\{\s*XUA-DOC-HOLDER\s*\}\}",
-                        self._properties.doc.content if self._properties.doc.content != '' else doc, template)
+                        content.replace('\\', '\\\\'), template)
 
-        resultDir = os.path.dirname(os.path.join(
+        resultDir = self._config['settings']['doc']['html']['destination-dir']
+        startDir = os.path.dirname(os.path.join(
             self._config['settings']['doc']['html']['destination-dir'],
             self._filename[len(os.getcwd())+1:]
         ))
-        rootRelativePath = os.path.relpath(os.getcwd(), start=resultDir)
-        result = re.sub(r"\{\{\s*XUA-ROOT\s*\}\}", rootRelativePath, result)
+        rootRelativePath = os.path.relpath(resultDir, start=startDir)
+        result = re.sub(r"\{\{\s*ROOT\s*\}\}", rootRelativePath, result)
 
         result = re.sub(
             r'%\s*' + self._SYMBOL_NAME_RE_GROUP + '\s*(\?\?\s*(.*))?\s*%',
@@ -187,6 +190,13 @@ class HtmlGenerator:
     def _html(self, statement):
         statement = statement.strip()
 
+        # latex
+        statement = re.sub(
+            r"\$(((?!\$).)*)\$",
+            r"\(\1\)",
+            statement
+        )
+
         # Bold
         statement = re.sub(
             r"\*\*(((?!\*\*).)*)\*\*",
@@ -222,15 +232,19 @@ class HtmlGenerator:
 
         # Image
         statement = re.sub(
-            r"\!\[(((?!\]).)*)\]\s*\((((?!\)).)*)\)",
+            r"\!\[(((?<!\]).)*)\]\s*\((((?<!\)).)*)\)",
             r"<img alt='\1' src='\3'>",
             statement
         )
 
         # Link
         statement = re.sub(
-            r"\[(((?!\]).)*)\]\s*\((((?!\)).)*)\)",
-            r"<a href='\3'>\1</a>",
+            r"\[(((?<!\]).)*)\]\s*\((((?<!\)).)*)\)",
+            lambda x: "<a href='" +
+            x.group(3).strip().replace(r'\(', '(').replace(r'\)', ')') +
+            "'>" +
+            x.group(1).replace(r'\[', '[').replace(r'\]', ']') +
+            "</a>",
             statement
         )
 

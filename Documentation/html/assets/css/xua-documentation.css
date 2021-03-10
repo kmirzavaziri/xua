@@ -371,7 +371,7 @@ code {
 
 pre code { 
     font-family: monospace;
-    line-height: 17px;
+    line-height: 2em;
 } 
 
 hr.doublespaceincode {

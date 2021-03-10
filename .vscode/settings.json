@@ -3,6 +3,7 @@
         "kamyar",
         "mirzavaziri",
         "unmarshal",
+        "unmarshaled",
         "urpi"
     ],
     "emeraldwalk.runonsave": {
@@ -12,5 +13,42 @@
                 "cmd": "/usr/bin/python3 /home/kamyar/VscProjects/xua/cli/xua.py build ${file}"
             }
         ]
-    }
+    },
+    "commands.commands": [
+        {
+            "text": "$(beaker) Quick Build",
+            "color": "#99FF00",
+            "command": "workbench.action.terminal.sendSequence",
+            "arguments": [
+                {
+                    "text": "echo 'hey'\n"
+                }
+            ],
+            "tooltip": "XUA Quick Build",
+            // "filterFileRegex": "\\.xua$"
+        },
+        {
+            "text": "$(tools) Full Build",
+            "color": "#55AAFF",
+            "command": "workbench.action.terminal.sendSequence",
+            "arguments": [
+                {
+                    "text": "/usr/bin/python3 /home/kamyar/VscProjects/xua/cli/xua.py build\n"
+                }
+            ],
+            "tooltip": "XUA Full Build",
+            // "filterFileRegex": "\\.xua$"
+        },
+        {
+            "text": "$(globe) Deploy",
+            "color": "#FFCC00",
+            "command": "workbench.action.terminal.sendSequence",
+            "arguments": [
+                {
+                    "text": "/usr/bin/python3 /home/kamyar/VscProjects/xua/cli/deploy.py \n"
+                }
+            ],
+            "tooltip": "Deploy the project on server",
+        },
+    ]
 }

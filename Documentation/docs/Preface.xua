@@ -79,7 +79,7 @@
 # project (shown as _A XUA Server_), a front-end library (shown as _A Marshal Library_), and a complete
 # set of documentations (shown as _Documentations_).
 
-# ![XUA Architecture]({{ XUA-ROOT }}/assets/images/XUAM.png)
+# ![XUA Architecture]({{ ROOT }}/assets/images/XUAM.png)
 
 # As shown above, there are only few units of the generated result that need explicit specification by
 # programmer (marked blue), a XUA project is simply a set of files specifying these units. This leads us to

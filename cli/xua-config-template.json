@@ -1,9 +1,19 @@
 {
     "settings": {
+        "database": {
+            "sql": {
+                "hostname": "localhost",
+                "username": "root",
+                "password": ""
+            }
+        },
         "server": {
             "php": {
                 "destination-dir": "public_html",
-                "quick-build": true
+                "quick-build": true,
+                "public": [
+                    "public"
+                ]
             }
         },
         "marshal": {
@@ -23,7 +33,7 @@
                 "destination-dir": "html",
                 "quick-build": true,
                 "default-template": "@default",
-                "build-pdf": false
+                "build-pdf": false,
             }
         }
     }

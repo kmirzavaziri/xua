@@ -3,7 +3,9 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="../../assets/css/xua-documentation.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/xua-documentation.css" rel="stylesheet" type="text/css" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <title>Preface; - XUA Documentation</title>
 </head>
 
@@ -12,11 +14,11 @@
     <div id="page">
 
         <div id="header">
-            <div class='booktitleinheader'><a href='../../html/index.html'>XUA Documentation</a></div>
+            <div class='booktitleinheader'><a href='../index.html'>XUA Documentation</a></div>
             <ul id='menu'>
-                <li class='menu-item'><a href='../../html/docs/index.html'>Table of Contents</a></li>
-                <li class='menu-item'><a href='../../html/docs/CheatSheet.html'>Cheat Sheet</a></li>
-                <li class='menu-item'><a href='../../html/docs/Architecture.html'>Architecture</a></li>
+                <li class='menu-item'><a href='../docs/index.html'>Table of Contents</a></li>
+                <li class='menu-item'><a href='../docs/CheatSheet.html'>Cheat Sheet</a></li>
+                <li class='menu-item'><a href='../docs/Architecture.html'>Architecture</a></li>
             </ul>
         </div>
 
@@ -41,7 +43,7 @@ a necessity, but the extension will help with code correction and autocomplete a
 you can clone our repository.</div><pre><code>git&nbsp;clone&nbsp;https://github.com/kmirzavaziri/xua.git<br></code></pre><div class = 'comment'>And run</div><pre><code>python3&nbsp;xua.py&nbsp;install<br></code></pre><div class = 'comment'><a href='#Hello_World!'><h3 class='h3' id='Hello_World!'> Hello World!</h3></a></div><div class = 'comment'>To create a new project, go to a directory you want to create the project and run</div><pre><code>xua&nbsp;new&nbsp;project&nbsp;PROJECT_NAME<br></code></pre><div class = 'comment'>Now build the template project you just created, run,</div><pre><code>xua&nbsp;build<br></code></pre><div class = 'comment'>or alternatively, click on build button that appears in VSCode after installing the plugin.</div><div class = 'comment'>Set up a PHP server on the build destination location (<code>public_html</code> by default)</div><pre><code>cd&nbsp;public_html<br>php&nbsp;-S&nbsp;localhost:8000<br></code></pre><div class = 'comment'>or alternatively, click on run server button that appears in VSCode after installing the plugin.</div><div class = 'comment'>Now you should be able to see the <em>Hello World!</em> page by visiting the <a href='http://localhost:8000/'>localhost:8000</a> page on
 your browser.</div><div class = 'comment'><a href='#Architecture'><h1 class='h1' id='Architecture'> Architecture</h1></a></div><div class = 'comment'>a XUA project is actually a combination of <strong>Specifications</strong> that will result in generating a server
 project (shown as <em>A XUA Server</em>), a front-end library (shown as <em>A Marshal Library</em>), and a complete
-set of documentations (shown as <em>Documentations</em>).</div><div class = 'comment'><img alt='XUA Architecture' src='../../assets/images/XUAM.png'></div><div class = 'comment'>As shown above, there are only few units of the generated result that need explicit specification by
+set of documentations (shown as <em>Documentations</em>).</div><div class = 'comment'><img alt='XUA Architecture' src='../assets/images/XUAM.png'></div><div class = 'comment'>As shown above, there are only few units of the generated result that need explicit specification by
 programmer (marked blue), a XUA project is simply a set of files specifying these units. This leads us to
 the following structure of a XUA project.</div><pre><code>XUA&nbsp;Project&nbsp;Root<br>├─&nbsp;Entities<br>│&nbsp;&nbsp;└─&nbsp;(empty&nbsp;by&nbsp;default)<br>├─&nbsp;Interfaces<br>│&nbsp;&nbsp;└─&nbsp;(homepage&nbsp;interface&nbsp;and&nbsp;URPI)<br>├─&nbsp;Methods<br>│&nbsp;&nbsp;└─&nbsp;(empty&nbsp;by&nbsp;default)<br>├─&nbsp;Resources<br>│&nbsp;&nbsp;├─&nbsp;Public<br>│&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;(empty&nbsp;by&nbsp;default)<br>│&nbsp;&nbsp;├─&nbsp;Private<br>│&nbsp;&nbsp;└─&nbsp;└─&nbsp;(empty&nbsp;by&nbsp;default)<br>├─&nbsp;Services<br>│&nbsp;&nbsp;├─&nbsp;Server<br>│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;PHP<br>│&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;└─&nbsp;(xua&nbsp;services)<br>│&nbsp;&nbsp;├─&nbsp;Marshal<br>│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;Dart<br>│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;(xua&nbsp;services)<br>│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;Java<br>│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;(xua&nbsp;services)<br>│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;JavaScript<br>│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;(xua&nbsp;services)<br>│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;Kotlin<br>│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;(xua&nbsp;services)<br>│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;Objective-C<br>│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;(xua&nbsp;services)<br>│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;Swift<br>│&nbsp;&nbsp;└─&nbsp;└─&nbsp;└─&nbsp;(xua&nbsp;services)<br>├─&nbsp;Supers<br>│&nbsp;&nbsp;└─&nbsp;(basic&nbsp;supers)<br>└─&nbsp;config.xml<br></code></pre><div class = 'comment'>In this documentation, we try to cover all of these units. By visiting the page <a href='Architecture.html'>Architecture</a>
 and clicking on a unit, you'll be redirected to documentation section of that unit.</div>
