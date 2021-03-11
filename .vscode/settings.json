@@ -23,7 +23,7 @@
             "command": "workbench.action.terminal.sendSequence",
             "arguments": [
                 {
-                    "text": "/usr/bin/python3 /home/kamyar/VscProjects/xua/cli/xua.py build\n"
+                    "text": "echo 'not yet'\n"
                 }
             ],
             "tooltip": "XUA - Full Build Current File",
@@ -36,7 +36,7 @@
             "command": "workbench.action.terminal.sendSequence",
             "arguments": [
                 {
-                    "text": "/usr/bin/python3 /home/kamyar/VscProjects/xua/cli/deploy.py \n"
+                    "text": "echo 'not yet'\n"
                 }
             ],
             "tooltip": "Deploy Current File",
@@ -49,7 +49,7 @@
             "command": "workbench.action.terminal.sendSequence",
             "arguments": [
                 {
-                    "text": "echo 'hey'\n"
+                    "text": "echo 'not yet'\n"
                 }
             ],
             "tooltip": "XUA - Quick Build The Whole Project",
@@ -73,7 +73,7 @@
             "command": "workbench.action.terminal.sendSequence",
             "arguments": [
                 {
-                    "text": "/usr/bin/python3 /home/kamyar/VscProjects/xua/cli/deploy.py \n"
+                    "text": "echo 'not yet'\n"
                 }
             ],
             "tooltip": "Deploy Project Changes",
