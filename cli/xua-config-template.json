@@ -10,30 +10,34 @@
         "server": {
             "php": {
                 "destination-dir": "public_html",
-                "quick-build": true,
-                "public": [
-                    "public"
-                ]
+                "quick": true,
+                "resources": {
+                    "public": "public",
+                    "private": "private"
+                }
             }
         },
         "marshal": {
             "dart": {
                 "destination-dir": "marshal/dart",
-                "quick-build": false
+                "quick": false
             }
         },
         "doc": {
             "latex": {
                 "destination-dir": "latex",
-                "quick-build": false,
+                "quick": false,
                 "default-template": "@default",
                 "build-pdf": true
             },
             "html": {
                 "destination-dir": "html",
-                "quick-build": true,
+                "quick": true,
                 "default-template": "@default",
                 "build-pdf": false,
+                "resources": [
+                    "public"
+                ]
             }
         }
     }

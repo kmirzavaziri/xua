@@ -1,0 +1,12 @@
+# XUA Documentation - Configurations
+# Kamyar Mirzavaziri
+# Winter 1399
+
+# Doc Constants
+    # @python doc.constants.TITLE = "Configurations;"
+    # @python doc.constants.SUBTITLE = "The way you like it"
+
+# Doc Configurations
+    # @python doc.renderComments = "doc"
+    # @python doc.renderCodes = "pure"
+

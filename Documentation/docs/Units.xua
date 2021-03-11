@@ -1,5 +1,5 @@
-# XUA Documentation - Preface
-# XUA Tools Development Team
+# XUA Documentation - Units
+# Kamyar Mirzavaziri
 # Winter 1399
 
 # Doc Constants
@@ -26,20 +26,6 @@
 # parties can use resources, and internally, i.e., available for internal resources and units. The idea is similar to private and
 # public features of a class, but a public feature is only accessible from other codes on the same project, while a universal resource
 # is accessible from other projects, even on other machines other than where server project is stored. XUA resources are divided to [Files](#Resource_Files), [Services](#PHP_Service_Classes), [Supers](#Super_Types), [Entities](#Entities), and [Methods](#Methods).
-
-# ### Entities
-# [(main chapter)](Entities.html)
-
-# XUA can be configured to communicate with a database server (usually MySQL), but the programmer needs to specify the database structure. To do so, XUA offers Entity Blocks, it will generate a PHP class extending a XUA abstract class called `XUA\Entity` for each Entity Block the programmer creates. these Entity classes are in a one-to-one relationship with database tables. Each row of the table then, can be corresponded by an instance of the table’s corresponding class.
-
-# In order to define an entity, the programmer needs to define a mapping called `Fields` that contains columns of entities as keys, and their types as values. Setting the `Fields` is mandatory, but there are some optional members an entity may have. One member is a list called `Indices`, which defines the MySQL indices, that would make select queries faster, or control unique values (Read more about MySQL indices by googling). Another is the function called `Validation`, that checks if an entity instance (a row) is valid. For example assume we have two fields `country` and `city` in entity `User`, the validation function is responsible to check if the city is inside the country and avoid invalid data from storing. Therefore an entity is theoretically a triplet $E = (F, I, V)$, but you'll see that you can override an entity methods, i.e., there are more to define on entity than just `Fields`, `Indices`, and `Validation`.  
-
-# ### Methods
-# [(main chapter)](Methods.html)
-
-# Methods are the main part of a XUA Project. A method is a very small unit that does a special job when called. One can think of methods as just functions but there are two differences. A method can be called from outside of the project, and can return multiple values.
-
-# Methods are simply triplets $M = (Q, S, B)$. First member, `Request`, shown by $Q$, defines the structure of request that needs to be prepared and given to the method, and the second one, `Response`, shown by $S$, defines the structure of response that the method returns. The third member, `Body`, shown by $B$ is a piece of code that does all the function.
 
 # ### Super Types
 # [(main chapter)](Supers.html)
@@ -79,8 +65,28 @@
 #        'value' => ['male', 'female']
 #    ]
 
+# ### Entities
+# [(main chapter)](Entities.html)
+
+# XUA can be configured to communicate with a database server (usually MySQL), but the programmer needs to specify the database structure. To do so, XUA offers Entity Blocks, it will generate a PHP class extending a XUA abstract class called `XUA\Entity` for each Entity Block the programmer creates. these Entity classes are in a one-to-one relationship with database tables. Each row of the table then, can be corresponded by an instance of the table’s corresponding class.
+
+# In order to define an entity, the programmer needs to define a mapping called `Fields` that contains columns of entities as keys, and their types as values. Setting the `Fields` is mandatory, but there are some optional members an entity may have. One member is a list called `Indices`, which defines the MySQL indices, that would make select queries faster, or control unique values (Read more about MySQL indices by googling). Another is the function called `Validation`, that checks if an entity instance (a row) is valid. For example assume we have two fields `country` and `city` in entity `User`, the validation function is responsible to check if the city is inside the country and avoid invalid data from storing. Therefore an entity is theoretically a triplet $E = (F, I, V)$, but you'll see that you can override entity methods, i.e., there are more to define on entity than just `Fields`, `Indices`, and `Validation`.  
+
+# ### Methods
+# [(main chapter)](Methods.html)
+
+# Methods are the main part of a XUA Project. A method is a very small unit that does a special job when called. One can think of methods as just functions but there are two differences. A method can be called from outside of the project, and can return multiple values.
+
+# Methods are simply triplets $M = (Q, S, B)$. First member, `Request`, shown by $Q$, defines the structure of request that needs to be prepared and given to the method, and the second one, `Response`, shown by $S$, defines the structure of response that the method returns. The third member, `Body`, shown by $B$ is a piece of code that does all the function.
+
 # ### PHP Service Classes
 # [(main chapter)](Services.html)
+
+# There are some data-types that are more than an entity or a super type. Some classes like `DateTime` are not in an equivalence relation with a database table, and are not possible to implement with XUA's super types, since the programmer may need methods like `addDays`, `format`, or `toJalali` from this data-type.
+
+# Also there are some procedures that need to be implemented somewhere other than methods, for example checking if a file is an image.
+
+# XUA satisfies this need by letting programmers write their own native PHP codes. Although the codes must be contained by classes, but the programmer is pretty mush free to do everything inside the classes. The xua engine will copy these native codes to the resulting project as they are.
 
 # ## Interfaces
 # [(main chapter)](Interfaces.html)
@@ -89,14 +95,26 @@
 
 # ## Resource Files
 
+# In almost any project, there are some files that are note codes or programs, these files can be anything, assets, user uploaded files, documents, etc. In XUA's terminology, we call any non-program file, a resource. The resources exist directly in the resulting project directory, and the programmer must mark the directories that contain resources as resource directory in config.json. Read [Configurations article](Configurations.html) to see how it is done.
+
 # ### Public Resource Files
+
+# Resource files can be public, i.e., accessible by just going to the file's address. For example when user opens a web page in the browser, there are some assets, e.g., styles, fonts, images, etc. that browser fetches from the web server. These files must be marked as public.
 
 # ### Private Resource Files
 
+# In many projects, there are some files that are needed to be on the server, but are not public files. For example think of an _online book store_. There are many `.pdf` files on the server which the server sends them by email or shows them on web only if the user is authorized and payed for the file. These files must be marked as private.
+
 # ## XUA Server Generated Units
 
+# There are some units existing in the server project, that are completely generated by XUA engine and there is no need for a programmer to modify them, but it helps if the programmer knows how they work, and in some cases, the programmer may modify them in a way that is more suitable for the project.
+
 # ### Universal Resources Pool Interface (URPI)
+
 # Accessing resources on same project is as easy as it was before, one unit can just call a resource internally and there is no complexity. Although accessing a resource form other machines needs a protocol, the client needs to marshal the request in a data type which is available for transmitting on the network, then we need to unmarshal the request in a way that is meaningful for Universal Resource Pool, this is done by a predefined interface called URPI. The client tells URPI what resource is needed, URPI calls the resource, prepare the result for network transmitting, and sends the result back to client, where the result can be unmarshaled and used.
+
+# __Note:__ The URPI is an interface, existing in the interfaces directory of the template project. The URPI is a xua source file, meaning it is not generated when building the project, it's generated only once, when making a new project from template. Therefore this unit is modifiable and even removable.
+
 
 # ### Route Detection Unit
 

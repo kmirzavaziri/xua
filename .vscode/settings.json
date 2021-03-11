@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
+        "Jalali",
         "kamyar",
         "mirzavaziri",
         "unmarshal",
@@ -16,19 +17,8 @@
     },
     "commands.commands": [
         {
-            "text": "$(beaker) Quick Build",
-            "color": "#99FF00",
-            "command": "workbench.action.terminal.sendSequence",
-            "arguments": [
-                {
-                    "text": "echo 'hey'\n"
-                }
-            ],
-            "tooltip": "XUA Quick Build",
-            // "filterFileRegex": "\\.xua$"
-        },
-        {
-            "text": "$(tools) Full Build",
+            "alignment": "left",
+            "text": "$(tools) Full Build File",
             "color": "#55AAFF",
             "command": "workbench.action.terminal.sendSequence",
             "arguments": [
@@ -36,11 +26,12 @@
                     "text": "/usr/bin/python3 /home/kamyar/VscProjects/xua/cli/xua.py build\n"
                 }
             ],
-            "tooltip": "XUA Full Build",
-            // "filterFileRegex": "\\.xua$"
+            "tooltip": "XUA - Full Build Current File",
+            "filterFileRegex": "\\.xua$"
         },
         {
-            "text": "$(globe) Deploy",
+            "alignment": "left",
+            "text": "$(globe) Deploy File",
             "color": "#FFCC00",
             "command": "workbench.action.terminal.sendSequence",
             "arguments": [
@@ -48,7 +39,56 @@
                     "text": "/usr/bin/python3 /home/kamyar/VscProjects/xua/cli/deploy.py \n"
                 }
             ],
-            "tooltip": "Deploy the project on server",
+            "tooltip": "Deploy Current File",
+            "filterFileRegex": "\\.xua$"
+        },
+        {
+            "alignment": "right",
+            "text": "$(beaker) Quick Build Project",
+            "color": "#99FF00",
+            "command": "workbench.action.terminal.sendSequence",
+            "arguments": [
+                {
+                    "text": "echo 'hey'\n"
+                }
+            ],
+            "tooltip": "XUA - Quick Build The Whole Project",
+        },
+        {
+            "alignment": "right",
+            "text": "$(tools) Full Build Project",
+            "color": "#55AAFF",
+            "command": "workbench.action.terminal.sendSequence",
+            "arguments": [
+                {
+                    "text": "/usr/bin/python3 /home/kamyar/VscProjects/xua/cli/xua.py build\n"
+                }
+            ],
+            "tooltip": "XUA - Full Build The Whole Project",
+        },
+        {
+            "alignment": "right",
+            "text": "$(globe) Deploy Changes",
+            "color": "#FFCC00",
+            "command": "workbench.action.terminal.sendSequence",
+            "arguments": [
+                {
+                    "text": "/usr/bin/python3 /home/kamyar/VscProjects/xua/cli/deploy.py \n"
+                }
+            ],
+            "tooltip": "Deploy Project Changes",
+        },
+        {
+            "alignment": "right",
+            "text": "$(globe) Full Deploy",
+            "color": "#FF5500",
+            "command": "workbench.action.terminal.sendSequence",
+            "arguments": [
+                {
+                    "text": "/usr/bin/python3 /home/kamyar/VscProjects/xua/cli/deploy.py \n"
+                }
+            ],
+            "tooltip": "Deploy The Whole Project",
         },
     ]
 }

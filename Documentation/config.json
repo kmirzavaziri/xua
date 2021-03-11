@@ -5,13 +5,16 @@
                 "default-template": "@default",
                 "gen-pdf": true,
                 "destination-dir": "latex",
-                "quick-build": false
+                "quick": false
             },
             "html": {
                 "default-template": "templates/template.html",
                 "gen-pdf": false,
                 "destination-dir": "html",
-                "quick-build": true
+                "quick": true,
+                "resources": [
+                    "assets"
+                ]
             }
         }
     }
