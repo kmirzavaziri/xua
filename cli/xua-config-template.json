@@ -20,7 +20,8 @@
         "marshal": {
             "dart": {
                 "destination-dir": "marshal/dart",
-                "quick": false
+                "quick": false,
+                "services": "services/dart"
             }
         },
         "doc": {

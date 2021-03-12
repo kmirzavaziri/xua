@@ -16,21 +16,21 @@
 # Create a new XUA project in the current directory.
 #    xua new project PROJECT_NAME
 
+# Create a new super file in current directory's XUA project.
+#    xua new super SUPER_NAME
+
 # Create a new entity file in current directory's XUA project.
 #    xua new entity ENTITY_NAME
 
 # Create a new method file in current directory's XUA project.
 #    xua new method METHOD_NAME
 
-# Create a new super file in current directory's XUA project.
-#    xua new super SUPER_NAME
-
 # Create a new service file for a specific language in current directory's XUA project.
 #    xua new service SERVICE-NAME [-l LANGUAGE]
 # where `LANGUAGE` can be Dart, PHP, Java, JavaScript, Kotlin, Objective-C, or Swift.
 
 # Create a new interface file in current directory's XUA project.
-#    xua new interface "ROUTE-SPECIFICATION"
+#    xua new interface
 
 # -- #########################################
 # # Build
@@ -41,7 +41,7 @@
 #    xua build PROJECT [PATH] [-c]
 # where the `PROJECT` can be `doc/latex`, `doc/html`, `server/php`, `marshal/dart`, `marshal/javascript`, etc.
 
-# Build projects that are labeled as `quick` in config.json.
+# Build projects that are labeled as `quick` in `config.json`.
 #    xua build quick [PATH] [-c]
 # __Note:__ If you have the plugin installed, when you hit the save button (`Ctrl+S`) the plugin automatically quick-builds the file that is being saved.
 
@@ -55,13 +55,13 @@
 
 # It's possible to config `xua-ext` to deploy on several environments, which you can define in `.xua-ext/settings.json`, programmers usually work with two environments called `demo` and `production`, you can have a different deploy procedure for each environment.
 
-# __Note:__ The `xua-ext` does not deploy any arbitrary given file, it only deploy source files and the files that are marked as [resource files](Units.html#Resource_Files) in config.json. The resources are only copied to the server, while the source files are  built first by `xua` command, and then the result gets deployed. 
+# __Note:__ The `xua-ext` does not deploy any arbitrary given file, it only deploy source files and the files that are marked as [resource files](Units.html#Resource_Files) in `config.json`. The resources are only copied to the server, while the source files are  built first by `xua` command, and then the result gets deployed. 
 
 # Deploy a specific project.
 #    xua-ext deploy PROJECT ENV [PATH] [-c]
 # where the `PROJECT` can be `doc/latex`, `doc/html`, `server/php`, `marshal/dart`, `marshal/javascript`, etc.
 
-# Deploy projects that are labeled as `quick` in config.json.
+# Deploy projects that are labeled as `quick` in `config.json`.
 #    xua-ext deploy quick ENV [PATH] [-c]
 
 # Deploy all projects.
@@ -72,22 +72,22 @@
 
 # ## Local Clean
 
-# Clean a project from files with no source file and are not marked as [resource files](Units.html#Resource_Files) in config.json.
+# Clean a project from files with no source file and are not marked as [resource files](Units.html#Resource_Files) in `config.json`.
 #    xua clean PROJECT
 
-# Clean projects that are labeled as `quick` from files with no source file and are not marked as [resource files](Units.html#Resource_Files) in config.json.
+# Clean projects that are labeled as `quick` from files with no source file and are not marked as [resource files](Units.html#Resource_Files) in `config.json`.
 #    xua clean quick
 
-# Clean all projects from files with no source file and are not marked as [resource files](Units.html#Resource_Files) in config.json.
+# Clean all projects from files with no source file and are not marked as [resource files](Units.html#Resource_Files) in `config.json`.
 #    xua clean all
 
 # ## Remote Clean
 
-# Clean a project located on `ENV` from files with no source file and are not marked as [resource files](Units.html#Resource_Files) in config.json.
+# Clean a project located on `ENV` from files with no source file and are not marked as [resource files](Units.html#Resource_Files) in `config.json`.
 #    xua-ext clean PROJECT ENV
 
-# Clean projects that are labeled as `quick` located on `ENV` from files with no source file and are not marked as [resource files](Units.html#Resource_Files) in config.json.
+# Clean projects that are labeled as `quick` located on `ENV` from files with no source file and are not marked as [resource files](Units.html#Resource_Files) in `config.json`.
 #    xua-ext clean quick ENV
 
-# Clean all projects located on `ENV` from files with no source file and are not marked as [resource files](Units.html#Resource_Files) in config.json.
+# Clean all projects located on `ENV` from files with no source file and are not marked as [resource files](Units.html#Resource_Files) in `config.json`.
 #    xua-ext clean all ENV
