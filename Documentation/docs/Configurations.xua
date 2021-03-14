@@ -10,3 +10,219 @@
     # @python doc.renderComments = "doc"
     # @python doc.renderCodes = "pure"
 
+# -- #########################################
+# # Introduction
+# There are different things that a programmer can configure. All of these configurations are done in a file called `config.json` existing in the root of the project. If no such a file exist, or is corrupted, most of the commands including `build` and `clean` would fail. In this chapter we cover all of these configurations in detail.
+
+# The config file contains 4 major parts: `server`, `marshal`, `doc`, and `etc`. Each of the first three parts is related to one of the three major resulting projects, while the last part, `etc` contains all other configurations. For each project, there are different languages the project can be generated in, and each project node has a child for each of these languages. So till now we know the structure is the following. (These are the currently available languages.)
+#    {
+#        "server": {
+#            "php": {}
+#        },
+#        "marshal": {
+#            "dart": {},
+#            "java": {},
+#            "javascript": {},
+#            "kotlin": {},
+#            "objectivec": {},
+#            "swift": {}
+#        },
+#        "doc": {
+#            "latex": {},
+#            "html": {}
+#        },
+#        "etc": {}
+#    }
+
+# The programmer can remove any of these nodes, which means there is no need to generate that project. For example we can remove all of `marshal` children but `javascript`, therefore after building all project, we just get one marshal library in `javascript`. Even we can remove a whole project. For example in case we don't want any marshal library, we can remove the node `marshal`. The current documentation that you're reading is a XUA project, but if you take a look at the config file, you'll see there is no `server` and `marshal` node, since we only want to build `doc` and nothing else.
+
+# -- #########################################
+# # Common Nodes
+# There are some nodes that all the projects have in common, we discuss them here once for all.
+
+# ## destination-dir
+# Node `destination-dir` is an optional string node, determining where XUA engine will put the resulting project files. The default value for each project is written in the project section.
+
+# ## quick
+# Node `quick`, is an optional boolean node, determining if the project is labeled as `quick`. If a project is labeled as `quick`, it is included in list of projects the commands `xua build quick` and `xua-ext deploy quick` will work on. For more information, read [Cheat Sheet](CheatSheet.html).
+
+# ## resources
+# Node `resources`, is an optional array or map, determining folders that are considered as `resources`. The default value for each project is written in the project section. Any file in the resulting project is generated from a source file, is a XUA base file added to project by XUA itself, or is a resource. Any other file will be deleted when cleaning the project, so it's very important to mention any directory you don't wanna get deleted under this node.
+
+# Server project `resources` node has two children `public`, and `private`, each of them is an array. Read more about the difference in section [Resource Files](Units.html#Resource_Files). But other projects only contain an array of `resources`, and there is no dividing into `public`, and `private`. The directory addresses are relative to the `destination-dir`. 
+
+# -- #########################################
+# # Server
+# The XUA server is only available in PHP, therefore there is only one node under `server`. The structure is the following.
+#    "php": {
+#        "destination-dir": "public_html",
+#        "quick": true,
+#        "resources": {
+#            "public": [
+#                "resources/public"
+#            ],
+#            "private": [
+#                "resources/private"
+#            ]
+#        },
+#        "services": "Services/php"
+#    }
+
+# Most nodes has been explained under [Common Nodes](#Common_Nodes), the remaining node are explained here.
+
+# ## services
+# services and are only project source file without `.xua` extension, and are copied to the project as they are. It's important to mark these files as `services`, or they won't get copied to the project. There can be only one directory of services, but it can contain multiple subdirectories.
+
+# -- #########################################
+# # Marshal
+# Marshal library is available in languages Dart, Java, JavaScript, Kotlin, Objective-C, and Swift. But there is no difference in the nodes, all languages share a same structure. The structure is the following.
+#    "{LANGUAGE}": {
+#        "destination-dir": "marshal/{LANGUAGE}",
+#        "quick": false,
+#        "resources": [
+#            "resources"
+#        ],
+#        "services": "Services/{LANGUAGE}"
+#    }
+
+# Most nodes has been explained under [Common Nodes](#Common_Nodes), the remaining node are explained here.
+
+# ## services
+# Just like PHP services, we can write native codes for client-side projects. these files do not come with `.xua` extension, and are copied to the project as they are. It's important to mark these files as `services`, or they won't get copied to the project. There can be only one directory of services, but it can contain multiple subdirectories.
+
+# -- #########################################
+# # Doc
+# Documentation is available in HTML and LaTeX. But there is no difference in the nodes, both languages share a same structure. The structure is the following.
+#    "{LANGUAGE}": {
+#        "destination-dir": "doc/{LANGUAGE}",
+#        "quick": false,
+#        "default-template": "templates/template.{LANGUAGE-EXTENSION}",
+#        "build-pdf": {false if LANGUAGE is html, and true if LANGUAGE is latex},
+#        "resources": [
+#            "resources"
+#        ]
+#    }
+
+# ## default-template
+# As described in section [Documentations](Units.html#Documentations), the documentations are file-to-file, meaning that for each source file, there exists a .html or .tex file and vice versa. For each source file, XUA generates an string containing, comments, auto-generated content, etc. This string then needs to be put in a template file. The template file must contain the variable `{{ XUA-DOC-HOLDER }}`. The XUA doc engine replaces it with the generated content, and saves the result in the corresponding path.
+
+# It's possible to override the `default-template` in a single file, and use another customized template. For more information read the main chapter of [Documentations](Documentations.html).
+
+# ## build-pdf
+# Node `build-pdf`is an optional boolean node, determining if the the build procedure must build a pdf from generated documentation.
+
+
+# -- #########################################
+# # Etc
+# Any other configuration that is not directly related to one project is stored under the node `etc`.
+
+# ## database
+# Currently, XUA only supports MySQL database server. Therefore node `database` under node `etc` can only have one child called `mysql`. The structure is very simple.
+#    "database": {
+#        "mysql": {
+#            "hostname": "localhost",
+#            "username": "root",
+#            "password": ""
+#        }
+#    }
+
+
+# -- #########################################
+# # Full Structure
+# After reading about the structure of each part, we reach the full structure of a `config.json` file.
+{
+    "server": {
+        "php": {
+            "destination-dir": "public_html",
+            "quick": true,
+            "resources": {
+                "public": [
+                    "resources/public"
+                ],
+                "private": [
+                    "resources/private"
+                ]
+            },
+            "services": "Services/php"
+        }
+    },
+    "marshal": {
+        "dart": {
+            "destination-dir": "marshal/dart",
+            "quick": false,
+            "resources": [
+                "resources"
+            ],
+            "services": "services/dart"
+        },
+        "java": {
+            "destination-dir": "marshal/java",
+            "quick": false,
+            "resources": [
+                "resources"
+            ],
+            "services": "services/java"
+        },
+        "javascript": {
+            "destination-dir": "marshal/javascript",
+            "quick": false,
+            "resources": [
+                "resources"
+            ],
+            "services": "services/javascript"
+        },
+        "kotlin": {
+            "destination-dir": "marshal/kotlin",
+            "quick": false,
+            "resources": [
+                "resources"
+            ],
+            "services": "services/kotlin"
+        },
+        "objectivec": {
+            "destination-dir": "marshal/objectivec",
+            "quick": false,
+            "resources": [
+                "resources"
+            ],
+            "services": "services/objectivec"
+        },
+        "swift": {
+            "destination-dir": "marshal/swift",
+            "quick": false,
+            "resources": [
+                "resources"
+            ],
+            "services": "services/swift"
+        }
+    },
+    "doc": {
+        "latex": {
+            "destination-dir": "doc/latex",
+            "quick": false,
+            "resources": [
+                "resources"
+            ],
+            "default-template": "templates/template.tex",
+            "build-pdf": true
+        },
+        "html": {
+            "destination-dir": "doc/html",
+            "quick": false,
+            "resources": [
+                "resources"
+            ],
+            "default-template": "templates/template.html",
+            "build-pdf": false
+        }
+    },
+    "etc": {
+        "database": {
+            "mysql": {
+                "hostname": "localhost",
+                "username": "root",
+                "password": ""
+            }
+        }
+    }
+}
