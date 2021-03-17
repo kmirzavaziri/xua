@@ -266,6 +266,8 @@ Super (
 #        }
 #        return true;
 #    }
+# Note that it's OK to fill the $reason when the return value is `true`. XUA automatically clears the `$reason` in that case.
+
 
 # #### Marshal and Unmarshal
 # Since the integers are possible to store and transmit, we can leave the marshal and unmarshal functions identity. But for the purpose of this documentation, we define a network transmit marshaling system, and leave the database store marshaling identity.
@@ -453,7 +455,7 @@ Super (
 }
 # @python doc.renderComments = "doc"
 
-# Note how we set the `$reason` without caring about the return value. XUA automatically clears the `$reason` if the return value is true. 
+# Note how we set the `$reason` without caring about the return value. XUA automatically clears the `$reason` if the return value is `true`.
 
 # ## Doubleton
 # TODO
