@@ -5,7 +5,18 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="../assets/css/xua-documentation.css" rel="stylesheet" type="text/css" />
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+         processEscapes: true
+        }
+      });
+    </script>
+
     <title>Preface; - XUA Documentation</title>
 </head>
 
@@ -45,8 +56,9 @@ your browser.</div><div class = 'comment'><a href='#Architecture'><h1 class='h1'
 project (shown as <em>A XUA Server</em>), a front-end library (shown as <em>A Marshal Library</em>), and a complete
 set of documentations (shown as <em>Documentations</em>).</div><div class = 'comment'><img alt='XUA Architecture' src='../assets/images/XUAM.png'></div><div class = 'comment'>As shown above, there are only few units of the generated result that need explicit specification by
 programmer (marked blue), a XUA project is simply a set of files specifying these units. This leads us to
-the following structure of a XUA project.</div><pre><code>XUA&nbsp;Project&nbsp;Root<br>├─&nbsp;Entities<br>│&nbsp;&nbsp;└─&nbsp;(empty&nbsp;by&nbsp;default)<br>├─&nbsp;Interfaces<br>│&nbsp;&nbsp;└─&nbsp;(homepage&nbsp;interface&nbsp;and&nbsp;URPI)<br>├─&nbsp;Methods<br>│&nbsp;&nbsp;└─&nbsp;(empty&nbsp;by&nbsp;default)<br>├─&nbsp;Resources<br>│&nbsp;&nbsp;├─&nbsp;Public<br>│&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;(empty&nbsp;by&nbsp;default)<br>│&nbsp;&nbsp;├─&nbsp;Private<br>│&nbsp;&nbsp;└─&nbsp;└─&nbsp;(empty&nbsp;by&nbsp;default)<br>├─&nbsp;Services<br>│&nbsp;&nbsp;├─&nbsp;Server<br>│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;PHP<br>│&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;└─&nbsp;(xua&nbsp;services)<br>│&nbsp;&nbsp;├─&nbsp;Marshal<br>│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;Dart<br>│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;(xua&nbsp;services)<br>│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;Java<br>│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;(xua&nbsp;services)<br>│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;JavaScript<br>│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;(xua&nbsp;services)<br>│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;Kotlin<br>│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;(xua&nbsp;services)<br>│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;Objective-C<br>│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;(xua&nbsp;services)<br>│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;Swift<br>│&nbsp;&nbsp;└─&nbsp;└─&nbsp;└─&nbsp;(xua&nbsp;services)<br>├─&nbsp;Supers<br>│&nbsp;&nbsp;└─&nbsp;(basic&nbsp;supers)<br>└─&nbsp;config.xml<br></code></pre><div class = 'comment'>In this documentation, we try to cover all of these units. By visiting the page <a href='Architecture.html'>Architecture</a>
-and clicking on a unit, you'll be redirected to documentation section of that unit.</div>
+the following structure of a XUA project.</div><pre><code>XUA&nbsp;Project&nbsp;Root<br>├─&nbsp;Entities<br>│&nbsp;&nbsp;└─&nbsp;(empty&nbsp;by&nbsp;default)<br>├─&nbsp;Interfaces<br>│&nbsp;&nbsp;└─&nbsp;(homepage&nbsp;interface&nbsp;and&nbsp;URPI)<br>├─&nbsp;Methods<br>│&nbsp;&nbsp;└─&nbsp;(empty&nbsp;by&nbsp;default)<br>├─&nbsp;Services<br>│&nbsp;&nbsp;├─&nbsp;Server<br>│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;PHP<br>│&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;└─&nbsp;(basic&nbsp;xua&nbsp;services)<br>│&nbsp;&nbsp;├─&nbsp;Marshal<br>│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;Dart<br>│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;(basic&nbsp;xua&nbsp;services)<br>│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;Java<br>│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;(basic&nbsp;xua&nbsp;services)<br>│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;JavaScript<br>│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;(basic&nbsp;xua&nbsp;services)<br>│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;Kotlin<br>│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;(basic&nbsp;xua&nbsp;services)<br>│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;Objective-C<br>│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;(basic&nbsp;xua&nbsp;services)<br>│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;Swift<br>│&nbsp;&nbsp;└─&nbsp;└─&nbsp;└─&nbsp;(basic&nbsp;xua&nbsp;services)<br>├─&nbsp;Supers<br>│&nbsp;&nbsp;└─&nbsp;(basic&nbsp;xua&nbsp;supers)<br>└─&nbsp;config.xml<br></code></pre><div class = 'comment'>In this documentation, we try to cover all of these units. By visiting the page <a href='Architecture.html'>Architecture</a>
+and clicking on a unit, you'll be redirected to documentation section of that unit. Note the Units documentation mainly contains information about why an object exist and what does it do in more theoretical way. For details on how (instead of why) to create a XUA object, syntax, etc. read the corresponding chapter.</div><div class = 'comment'><a href='#Single_Object_Policy'><h2 class='h2' id='Single_Object_Policy'> Single Object Policy</h2></a>
+XUA advocates single object policy. A <code>.xua</code> file is either one <code>Entity</code>, one <code>Interface</code>, one <code>Method</code>, or one <code>Super</code>. It's not possible to put more than one object in a file, unless it's for documentation purposes and does not affect the server project.</div>
 
         </div>
 

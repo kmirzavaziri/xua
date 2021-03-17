@@ -2,6 +2,7 @@ import re
 import os
 import shutil
 from sympy import preview
+import html
 
 
 class Doc:
@@ -163,6 +164,7 @@ class HtmlGenerator:
         return []
 
     def _appendCode(self, statement):
+        statement = html.escape(statement)
         statement = statement.replace("\t", "    ")
         statement = statement.replace(" ", "&nbsp;")
         statement += "<br>" if statement.strip() != "" else ""
@@ -191,11 +193,11 @@ class HtmlGenerator:
         statement = statement.strip()
 
         # latex
-        statement = re.sub(
-            r"\$(((?!\$).)*)\$",
-            r"\(\1\)",
-            statement
-        )
+        # statement = re.sub(
+        #     r"\$(((?!\$).)*)\$",
+        #     r"\(\1\)",
+        #     statement
+        # )
 
         # Bold
         statement = re.sub(
@@ -226,7 +228,8 @@ class HtmlGenerator:
         # Inline Code
         statement = re.sub(
             r"`(((?!(?<!\\)`).)*)`",
-            lambda x: "<code>" + x.group(1).replace(r"\`", "`") + "</code>",
+            lambda x: "<code>" +
+            html.escape(x.group(1).replace(r"\`", "`")) + "</code>",
             statement
         )
 

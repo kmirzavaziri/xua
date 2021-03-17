@@ -92,32 +92,29 @@
 #    │  └─ (homepage interface and URPI)
 #    ├─ Methods
 #    │  └─ (empty by default)
-#    ├─ Resources
-#    │  ├─ Public
-#    │  │  └─ (empty by default)
-#    │  ├─ Private
-#    │  └─ └─ (empty by default)
 #    ├─ Services
 #    │  ├─ Server
 #    │  │  ├─ PHP
-#    │  │  └─ └─ (xua services)
+#    │  │  └─ └─ (basic xua services)
 #    │  ├─ Marshal
 #    │  │  ├─ Dart
-#    │  │  │  └─ (xua services)
+#    │  │  │  └─ (basic xua services)
 #    │  │  ├─ Java
-#    │  │  │  └─ (xua services)
+#    │  │  │  └─ (basic xua services)
 #    │  │  ├─ JavaScript
-#    │  │  │  └─ (xua services)
+#    │  │  │  └─ (basic xua services)
 #    │  │  ├─ Kotlin
-#    │  │  │  └─ (xua services)
+#    │  │  │  └─ (basic xua services)
 #    │  │  ├─ Objective-C
-#    │  │  │  └─ (xua services)
+#    │  │  │  └─ (basic xua services)
 #    │  │  ├─ Swift
-#    │  └─ └─ └─ (xua services)
+#    │  └─ └─ └─ (basic xua services)
 #    ├─ Supers
-#    │  └─ (basic supers)
+#    │  └─ (basic xua supers)
 #    └─ config.xml
 
 # In this documentation, we try to cover all of these units. By visiting the page [Architecture](Architecture.html)
-# and clicking on a unit, you'll be redirected to documentation section of that unit.
-# -- The Units documentation mainly contains information about why an object exist and what does it do. For details on how to create a XUA object, syntax, etc. click on the corresponding directory in the project structure above.
+# and clicking on a unit, you'll be redirected to documentation section of that unit. Note the Units documentation mainly contains information about why an object exist and what does it do in more theoretical way. For details on how (instead of why) to create a XUA object, syntax, etc. read the corresponding chapter.
+
+# ## Single Object Policy
+# XUA advocates single object policy. A `.xua` file is either one `Entity`, one `Interface`, one `Method`, or one `Super`. It's not possible to put more than one object in a file, unless it's for documentation purposes and does not affect the server project. 

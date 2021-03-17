@@ -1,0 +1,70 @@
+# XUA Documentation - Compiler Handbook
+# Kamyar Mirzavaziri
+# Winter 1399
+
+# Doc Constants
+    # @python doc.constants.TITLE = "Compiler Handbook;"
+    # @python doc.constants.SUBTITLE = "The Blueprints"
+
+# Doc Configurations
+    # @python doc.renderComments = "doc"
+    # @python doc.renderCodes = "pure"
+
+# -- #########################################
+# # Tokens
+# $\text{ADRESS}$, $\text{ID}$, $number$, $string$, $\mathbf{true}$, $\mathbf{false}$, $\mathbf{null}$, brackets, parenthesis, comma, semi-colon, colon, etc.
+
+# -- #########################################
+# # XUA Syntax
+
+# ## Shared Syntax
+# $$\begin{eqnarray}
+# program & ::= & super ~ | ~ entity ~ | ~ method ~ | interface ~  \\
+# type & ::= & \text{ADDRESS} ([\![\text{ID} ~ = ~ const, ]\!]^*)\\
+# & | & \text{ADDRESS} (\text{ID} ~ = ~ const ~ [\![, \text{ID} ~ = ~ const ]\!]^*)\\
+# const & ::= & number \\
+# & | & string \\
+# & | & \mathbf{[} [\![ const, ]\!]^* \mathbf{]} \\
+# & | & \mathbf{[} const ~ [\![ , const ]\!]^* \mathbf{]} \\
+# & | & \mathbf{[} [\![ \text{ID} => const, ]\!]^* \mathbf{]} \\
+# & | & \mathbf{[} \text{ID} => const ~ [\![ , \text{ID} => const ]\!]^* \mathbf{]} \\
+# & | & const + const \\
+# & | & const - const \\
+# & | & const * const \\
+# & | & const ~\hat{}~ const \\
+# & | & const ~/~ const \\
+# & | & const ~//~ const \\
+# & | & const ~\%~ const \\
+# & | & const . const \\
+# & | & \mathbf{true} \\
+# & | & \mathbf{false} \\
+# & | & \mathbf{null} \\
+# expr & ::= & \mathbf{&lt;?php} ~ code ~ \mathbf{?&gt;} \\
+# & | & const.
+# \end{eqnarray}$$
+
+# ## Super Syntax
+# $$\begin{eqnarray}
+# super & ::= & \mathbf{Super} ~ [\mathbf{extends} ~ \text{ADDRESS}] ~ ( ~ [\![ [\mathbf{const}] ~ \text{ID} : type ~ [= ~ const]; ]\!]^* ~ )
+# ~ \{ [\![ super\_content ]\!]^* \} \\
+# super\_content & ::= & \mathbf{Validation} ~ \{ ~ code ~ \} \\
+# & | & \mathbf{Predicate} ~ \{ ~ code ~ \} \\
+# & | & \mathbf{Marshal}<\text{ID}> ~ \{ ~ code ~ \} \\
+# & | & \mathbf{Unmarshal}<\text{ID}> ~ \{ ~ code ~ \} \\
+# & | & \mathbf{DatabaseType} ~ \{ ~ code ~ \}.
+# \end{eqnarray}$$
+
+# ## Entity Syntax
+# $$\begin{eqnarray}
+# entity & ::= & \\
+# \end{eqnarray}$$
+
+# ## Method Syntax
+# $$\begin{eqnarray}
+# method & ::= & \\
+# \end{eqnarray}$$
+
+# ## Interface Syntax
+# $$\begin{eqnarray}
+# interface & ::= & \\
+# \end{eqnarray}$$
