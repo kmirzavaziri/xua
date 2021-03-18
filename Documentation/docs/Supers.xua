@@ -456,6 +456,3 @@ Super (
 # @python doc.renderComments = "doc"
 
 # Note how we set the `$reason` without caring about the return value. XUA automatically clears the `$reason` if the return value is `true`.
-
-# ## Doubleton
-# TODO

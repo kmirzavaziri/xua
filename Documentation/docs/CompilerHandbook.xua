@@ -20,8 +20,8 @@
 # ## Shared Syntax
 # $$\begin{eqnarray}
 # program & ::= & super ~ | ~ entity ~ | ~ method ~ | interface ~  \\
-# type & ::= & \text{ADDRESS} ([\![\text{ID} ~ = ~ const, ]\!]^*)\\
-# & | & \text{ADDRESS} (\text{ID} ~ = ~ const ~ [\![, \text{ID} ~ = ~ const ]\!]^*)\\
+# type & ::= & \text{ID} ([\![\text{ID} ~ = ~ const, ]\!]^*)\\
+# & | & \text{ID} (\text{ID} ~ = ~ const ~ [\![, \text{ID} ~ = ~ const ]\!]^*)\\
 # const & ::= & number \\
 # & | & string \\
 # & | & \mathbf{[} [\![ const, ]\!]^* \mathbf{]} \\
@@ -35,6 +35,7 @@
 # & | & const ~/~ const \\
 # & | & const ~//~ const \\
 # & | & const ~\%~ const \\
+# & | & - const \\
 # & | & const . const \\
 # & | & \mathbf{true} \\
 # & | & \mathbf{false} \\
@@ -45,7 +46,7 @@
 
 # ## Super Syntax
 # $$\begin{eqnarray}
-# super & ::= & \mathbf{Super} ~ [\mathbf{extends} ~ \text{ADDRESS}] ~ ( ~ [\![ [\mathbf{const}] ~ \text{ID} : type ~ [= ~ const]; ]\!]^* ~ )
+# super & ::= & \mathbf{Super} ~ [\mathbf{extends} ~ \text{ID}] ~ ( ~ [\![ [\mathbf{const}] ~ \text{ID} : type ~ [= ~ const]; ]\!]^* ~ )
 # ~ \{ [\![ super\_content ]\!]^* \} \\
 # super\_content & ::= & \mathbf{Validation} ~ \{ ~ code ~ \} \\
 # & | & \mathbf{Predicate} ~ \{ ~ code ~ \} \\

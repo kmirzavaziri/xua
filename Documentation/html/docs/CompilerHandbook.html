@@ -44,8 +44,8 @@
 $\text{ADRESS}$, $\text{ID}$, $number$, $string$, $\mathbf{true}$, $\mathbf{false}$, $\mathbf{null}$, brackets, parenthesis, comma, semi-colon, colon, etc.</div><div class = 'comment'><a href='#XUA_Syntax'><h1 class='h1' id='XUA_Syntax'> XUA Syntax</h1></a></div><div class = 'comment'><a href='#Shared_Syntax'><h2 class='h2' id='Shared_Syntax'> Shared Syntax</h2></a>
 $$\begin{eqnarray}
 program & ::= & super ~ | ~ entity ~ | ~ method ~ | interface ~  \\
-type & ::= & \text{ADDRESS} ([\![\text{ID} ~ = ~ const, ]\!]^*)\\
-& | & \text{ADDRESS} (\text{ID} ~ = ~ const ~ [\![, \text{ID} ~ = ~ const ]\!]^*)\\
+type & ::= & \text{ID} ([\![\text{ID} ~ = ~ const, ]\!]^*)\\
+& | & \text{ID} (\text{ID} ~ = ~ const ~ [\![, \text{ID} ~ = ~ const ]\!]^*)\\
 const & ::= & number \\
 & | & string \\
 & | & \mathbf{[} [\![ const, ]\!]^* \mathbf{]} \\
@@ -59,6 +59,7 @@ const & ::= & number \\
 & | & const ~/~ const \\
 & | & const ~//~ const \\
 & | & const ~\%~ const \\
+& | & - const \\
 & | & const . const \\
 & | & \mathbf{true} \\
 & | & \mathbf{false} \\
@@ -67,7 +68,7 @@ expr & ::= & \mathbf{&lt;?php} ~ code ~ \mathbf{?&gt;} \\
 & | & const.
 \end{eqnarray}$$</div><div class = 'comment'><a href='#Super_Syntax'><h2 class='h2' id='Super_Syntax'> Super Syntax</h2></a>
 $$\begin{eqnarray}
-super & ::= & \mathbf{Super} ~ [\mathbf{extends} ~ \text{ADDRESS}] ~ ( ~ [\![ [\mathbf{const}] ~ \text{ID} : type ~ [= ~ const]; ]\!]^* ~ )
+super & ::= & \mathbf{Super} ~ [\mathbf{extends} ~ \text{ID}] ~ ( ~ [\![ [\mathbf{const}] ~ \text{ID} : type ~ [= ~ const]; ]\!]^* ~ )
 ~ \{ [\![ super\_content ]\!]^* \} \\
 super\_content & ::= & \mathbf{Validation} ~ \{ ~ code ~ \} \\
 & | & \mathbf{Predicate} ~ \{ ~ code ~ \} \\
