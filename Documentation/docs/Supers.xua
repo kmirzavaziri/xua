@@ -134,6 +134,11 @@ Super () {
 # ## Hierarchy
 # Supers can come in a hierarchy just like PHP classes, and each block is a class method. It's possible to call parent method in the child method since the block's content are written in php. It's also possible to call parent methods in non-PHP blocks with respect to the language syntax. Also the arguments of child super override the ones in parent. This override includes type, default value, and being constant. Also it's possible to add new arguments to the type. Read [Examples](#Examples) for more details.
 
+# ## Visibility
+# The visibility of supers is controlled by marshal and unmarshal methods. Although the supers are never accessible in the front-end project, but the Marshal library can use these methods for sending and receiving values of a type. But if the methods are not available, this obviously means we don't want the Marshal library to be able to use them.
+
+# However, there is usually no point in controlling super's visibility. 
+
 # -- #########################################
 # # Usage
 # It's possible to use a defined super in both PHP and XUA languages, but not in marshal library.
