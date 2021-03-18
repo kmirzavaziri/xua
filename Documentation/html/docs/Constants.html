@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="../assets/css/xua-documentation.css" rel="stylesheet" type="text/css" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+         processEscapes: true
+        }
+      });
+    </script>
+
+    <title>Constants; - XUA Documentation</title>
+</head>
+
+<body>
+
+    <div id="page">
+
+        <div id="header">
+            <div class='booktitleinheader'><a href='../index.html'>XUA Documentation</a></div>
+            <ul id='menu'>
+                <li class='menu-item'><a href='../docs/index.html'>Table of Contents</a></li>
+                <li class='menu-item'><a href='../docs/CheatSheet.html'>Cheat Sheet</a></li>
+                <li class='menu-item'><a href='../docs/Architecture.html'>Architecture</a></li>
+            </ul>
+        </div>
+
+        <div id="main">
+
+            <h1 class="libtitle">
+                Constants;
+                <span class="subtitle">A Tiny Bit of Computation</span>
+            </h1>
+
+            <div class = 'comment'><a href='#Introduction'><h1 class='h1' id='Introduction'> Introduction</h1></a></div><div class = 'comment'>Constants have really minor usages in XUA e.g. setting default value, passing values to supers, use in config file, or any other situation when we need to mention a value. Constants in XUA are quite similar to what other languages call expressions. But the point of constants is being totally deterministic. Constant values are completely computable by only reading the source code, and nothing will affect the values during runtime. There is no usage of nondeterministic expressions in XUA syntax, and constants help catching more errors during runtime, therefore XUA only supports constants.</div><div class = 'comment'>It's possible to configure the project to interpret a directory as constants. Then the json files in that directory are considered as defined constants which we can refer to. There are also some operations available on constants. This may seem redundant since the evaluating value is already known, but this feature helps with cleaner codes. For example it's really cleaner and easier to write and read to say <code>15 * 60</code> seconds instead of <code>900</code> seconds. So XUA does a tiny bit of computation to multiply <code>15</code> by <code>60</code>, but actually there is no actual computation and the result is already known.</div><div class = 'comment'>XUA constants are available to use in json files, including <code>config.json</code> and even the constant files themselves. To use this feature, the value must be provided as a string that starts with <code>@xua</code> and then contains an expression.</div><div class = 'comment'><a href='#Syntax'><h1 class='h1' id='Syntax'> Syntax</h1></a>
+XUA follows the json syntax for values.</div><div class = 'comment'><a href='#Numbers'><h2 class='h2' id='Numbers'> Numbers</h2></a></div><div class = 'comment'><a href='#Syntax'><h3 class='h3' id='Syntax'> Syntax</h3></a>
+There is nothing more trivial than writing a number, but there are some things you may didn't know about numbers in json. A number can start with <code>-</code> or <code>+</code> sign, followed by a series of digits, then it can have a radix point <code>.</code> and another series of number, and json also supports scientific notation which means then the number can continue with the letter <code>E</code> or <code>e</code> and then may have a <code>+</code> or <code>-</code> and then another series of digits.</div><div class = 'comment'><a href='#Operations'><h3 class='h3' id='Operations'> Operations</h3></a>
+There is set of simple operations available for numeric values.</div><div class = 'comment'><a href='#Summation'><h4 class='h4' id='Summation'> Summation</h4></a>
+The expression <code>a + b</code> evaluates to the sum of <code>a</code> and <code>b</code>.</div><div class = 'comment'><a href='#Subtraction'><h4 class='h4' id='Subtraction'> Subtraction</h4></a>
+The expression <code>a - b</code> evaluates to <code>a</code> minus <code>b</code>.</div><div class = 'comment'><a href='#Multiplication'><h4 class='h4' id='Multiplication'> Multiplication</h4></a>
+The expression <code>a * b</code> evaluates to <code>a</code> times <code>b</code>.</div><div class = 'comment'><a href='#Division'><h4 class='h4' id='Division'> Division</h4></a>
+The expression <code>a / b</code> evaluates to <code>a</code> divided by <code>b</code>.</div><div class = 'comment'><a href='#Exponentiation'><h4 class='h4' id='Exponentiation'> Exponentiation</h4></a>
+The expression <code>a ^ b</code> evaluates to <code>a</code> raised to the power of <code>b</code>.</div><div class = 'comment'><a href='#Integer_Division'><h4 class='h4' id='Integer_Division'> Integer Division</h4></a>
+The expression <code>a // b</code> evaluates to the quotient of <code>a</code> by <code>b</code>.</div><div class = 'comment'><a href='#Modulation'><h4 class='h4' id='Modulation'> Modulation</h4></a>
+The expression <code>a // b</code> evaluates to the remainder of <code>a</code> by <code>b</code>.</div><div class = 'comment'><a href='#Additive_Inverse'><h4 class='h4' id='Additive_Inverse'> Additive Inverse</h4></a>
+The expression <code>-a</code> evaluates to the <code>0 - a</code>.</div><div class = 'comment'><a href='#Example'><h3 class='h3' id='Example'> Example</h3></a>
+The expression <code>--1.1 ^ 365</code> evaluates to <code>1.28330558e15</code>.</div><div class = 'comment'><a href='#Strings'><h2 class='h2' id='Strings'> Strings</h2></a></div><div class = 'comment'><a href='#Syntax'><h3 class='h3' id='Syntax'> Syntax</h3></a>
+Since we are trying to stick with json syntax, strings are contained in a couple of <code>&quot;</code>, and can contain escape characters, but <code>&#x27;</code> is not permitted.</div><div class = 'comment'><a href='#Operations'><h3 class='h3' id='Operations'> Operations</h3></a>
+The only operation for strings is concatenation.</div><div class = 'comment'><a href='#Concatenation'><h4 class='h4' id='Concatenation'> Concatenation</h4></a>
+The expression <code>a + b</code> evaluates to the concatenation of <code>a</code> and <code>b</code>.</div><div class = 'comment'><a href='#Example'><h3 class='h3' id='Example'> Example</h3></a>
+The expression <code>&quot;Hello John!\n&quot; + &quot;\t//\&quot;Such a nice day.\&quot;\\\\&quot;</code> evaluates to the following value.</div><pre><code>Hello&nbsp;John!<br>&nbsp;&nbsp;&nbsp;&nbsp;//&quot;Such&nbsp;a&nbsp;nice&nbsp;day.&quot;\\<br></code></pre><div class = 'comment'><a href='#Boolean_and_Null_Values'><h2 class='h2' id='Boolean_and_Null_Values'> Boolean and Null Values</h2></a></div><div class = 'comment'><a href='#Syntax'><h3 class='h3' id='Syntax'> Syntax</h3></a>
+Symbols <code>true</code>, <code>false</code>, and <code>null</code> are reserved (case-insensitive) for boolean and null values and cannot be used for naming any other object.</div><div class = 'comment'><a href='#Lists'><h2 class='h2' id='Lists'> Lists</h2></a></div><div class = 'comment'><a href='#Syntax'><h3 class='h3' id='Syntax'> Syntax</h3></a>
+Lists follow json array syntax.</div><pre><code>[<br>&nbsp;&nbsp;&nbsp;&nbsp;listItem0,<br>&nbsp;&nbsp;&nbsp;&nbsp;...,<br>&nbsp;&nbsp;&nbsp;&nbsp;listItemN<br>]<br></code></pre><div class = 'comment'>But it's permitted to leave a comma at the end.</div><pre><code>[<br>&nbsp;&nbsp;&nbsp;&nbsp;listItem0,<br>&nbsp;&nbsp;&nbsp;&nbsp;...,<br>&nbsp;&nbsp;&nbsp;&nbsp;listItemN,<br>]<br></code></pre><div class = 'comment'><a href='#Operations'><h3 class='h3' id='Operations'> Operations</h3></a>
+The only operation for strings is concatenation.</div><div class = 'comment'><a href='#Concatenation'><h4 class='h4' id='Concatenation'> Concatenation</h4></a>
+The expression <code>a + b</code> evaluates to the concatenation of <code>a</code> and <code>b</code>.</div><div class = 'comment'><a href='#Example'><h3 class='h3' id='Example'> Example</h3></a>
+The expression <code>[42.42] + [] + [&#x27;Hello&#x27;, &#x27;world&#x27;]</code> evaluates to <code>[42.42, &#x27;Hello&#x27;, &#x27;world&#x27;]</code>.</div><div class = 'comment'><a href='#Maps'><h2 class='h2' id='Maps'> Maps</h2></a></div><div class = 'comment'><a href='#Syntax'><h3 class='h3' id='Syntax'> Syntax</h3></a>
+Maps in our terminology are actually objects in json terminology, and follow the same syntax.</div><pre><code>[<br>&nbsp;&nbsp;&quot;mapKey0&quot;:&nbsp;mapValue0,<br>&nbsp;&nbsp;...,<br>&nbsp;&nbsp;&quot;mapKeyN&quot;:&nbsp;mapValueN<br>]<br></code></pre><div class = 'comment'>Similar to lists, it's permitted to leave a comma at the end.</div><pre><code>[<br>&nbsp;&nbsp;&quot;mapKey0&quot;:&nbsp;mapValue0,<br>&nbsp;&nbsp;...,<br>&nbsp;&nbsp;&quot;mapKeyN&quot;:&nbsp;mapValueN,<br>]<br></code></pre><div class = 'comment'><a href='#Operations'><h3 class='h3' id='Operations'> Operations</h3></a>
+The only operation for strings is merge.</div><div class = 'comment'><a href='#Merge'><h4 class='h4' id='Merge'> Merge</h4></a>
+The expression <code>a + b</code> evaluates to the merging result of <code>a</code> and <code>b</code>. The order of operands is important in this operation, i.e. <code>a + b</code> differs from <code>b + a</code>, since the latter map overrides the existing data from the former map.</div><div class = 'comment'><a href='#Example'><h3 class='h3' id='Example'> Example</h3></a>
+The expression <code>{&quot;firstName&quot;: &quot;John&quot;} + {&quot;lastName&quot;: &quot;Doe&quot;} + {&quot;firstName&quot;: &quot;Jane&quot;}</code> evaluates to <code>{&quot;firstName&quot;: &quot;Jane&quot;, lastName: &quot;Doe&quot;}</code>.</div><div class = 'comment'><a href='#Referral_Constant'><h2 class='h2' id='Referral_Constant'> Referral Constant</h2></a></div><div class = 'comment'><a href='#Syntax'><h3 class='h3' id='Syntax'> Syntax</h3></a>
+The referral constants are accessible by mentioning the json file path relative to constants directory and then the object address. Something like</div><pre><code>path\to\json\file\propertyName\childPropertyName<br></code></pre><div class = 'comment'><a href='#Example'><h3 class='h3' id='Example'> Example</h3></a>
+For example let's say that we have a json file <code>constants/credentials/mysql.json</code> to manage different credentials on local, demo, and production environments. The content is the following.</div><pre><code>{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;host&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;name&quot;:&nbsp;&quot;localhost&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;port&quot;:&nbsp;&quot;3306&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;user&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;name&quot;:&nbsp;&quot;root&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;pass&quot;:&nbsp;&quot;&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>}<br></code></pre><div class = 'comment'>Now to get the value of <code>password</code> we may write the following expression.</div><pre><code>credentials\mysql\user\pass<br></code></pre><div class = 'comment'>A more complicated wish would be to get the full host name.</div><pre><code>credentials\mysql\host\name&nbsp;+&nbsp;&#x27;:&#x27;&nbsp;+&nbsp;credentials\mysql\host\port<br></code></pre><div class = 'comment'>which will evaluate to <code>localhost:3306</code>.</div><div class = 'comment'>Now we can use these values in the <code>config.json</code> file.</div><pre><code>&quot;database&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&quot;mysql&quot;:&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;hostname&quot;:&nbsp;&quot;@xua&nbsp;credentials\mysql\host\name&nbsp;+&nbsp;&#x27;:&#x27;&nbsp;+&nbsp;credentials\mysql\host\port&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;username&quot;:&nbsp;&quot;@xua&nbsp;credentials\mysql\user\name&quot;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;password&quot;:&nbsp;&quot;@xua&nbsp;credentials\mysql\user\pass&quot;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>}<br></code></pre>
+
+        </div>
+
+        <div id="footer">
+            This page has been generated by <a href="http://xuarazmi.ir/">xua</a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

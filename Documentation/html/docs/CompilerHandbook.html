@@ -46,12 +46,13 @@ $$\begin{eqnarray}
 program & ::= & super ~ | ~ entity ~ | ~ method ~ | interface ~  \\
 type & ::= & \text{ID} ([\![\text{ID} ~ = ~ const, ]\!]^*)\\
 & | & \text{ID} (\text{ID} ~ = ~ const ~ [\![, \text{ID} ~ = ~ const ]\!]^*)\\
-const & ::= & number \\
+const & ::= & \text{ID} \\
+& | & number \\
 & | & string \\
 & | & \mathbf{[} [\![ const, ]\!]^* \mathbf{]} \\
 & | & \mathbf{[} const ~ [\![ , const ]\!]^* \mathbf{]} \\
-& | & \mathbf{[} [\![ \text{ID} => const, ]\!]^* \mathbf{]} \\
-& | & \mathbf{[} \text{ID} => const ~ [\![ , \text{ID} => const ]\!]^* \mathbf{]} \\
+& | & \mathbf{\{} [\![ string : const, ]\!]^* \mathbf{\}} \\
+& | & \mathbf{\{} string : const ~ [\![ , string : const ]\!]^* \mathbf{\}} \\
 & | & const + const \\
 & | & const - const \\
 & | & const * const \\
@@ -60,12 +61,9 @@ const & ::= & number \\
 & | & const ~//~ const \\
 & | & const ~\%~ const \\
 & | & - const \\
-& | & const . const \\
 & | & \mathbf{true} \\
 & | & \mathbf{false} \\
-& | & \mathbf{null} \\
-expr & ::= & \mathbf{&lt;?php} ~ code ~ \mathbf{?&gt;} \\
-& | & const.
+& | & \mathbf{null}.
 \end{eqnarray}$$</div><div class = 'comment'><a href='#Super_Syntax'><h2 class='h2' id='Super_Syntax'> Super Syntax</h2></a>
 $$\begin{eqnarray}
 super & ::= & \mathbf{Super} ~ [\mathbf{extends} ~ \text{ID}] ~ ( ~ [\![ [\mathbf{const}] ~ \text{ID} : type ~ [= ~ const]; ]\!]^* ~ )

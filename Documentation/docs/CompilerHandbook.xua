@@ -22,12 +22,13 @@
 # program & ::= & super ~ | ~ entity ~ | ~ method ~ | interface ~  \\
 # type & ::= & \text{ID} ([\![\text{ID} ~ = ~ const, ]\!]^*)\\
 # & | & \text{ID} (\text{ID} ~ = ~ const ~ [\![, \text{ID} ~ = ~ const ]\!]^*)\\
-# const & ::= & number \\
+# const & ::= & \text{ID} \\
+# & | & number \\
 # & | & string \\
 # & | & \mathbf{[} [\![ const, ]\!]^* \mathbf{]} \\
 # & | & \mathbf{[} const ~ [\![ , const ]\!]^* \mathbf{]} \\
-# & | & \mathbf{[} [\![ \text{ID} => const, ]\!]^* \mathbf{]} \\
-# & | & \mathbf{[} \text{ID} => const ~ [\![ , \text{ID} => const ]\!]^* \mathbf{]} \\
+# & | & \mathbf{\{} [\![ string : const, ]\!]^* \mathbf{\}} \\
+# & | & \mathbf{\{} string : const ~ [\![ , string : const ]\!]^* \mathbf{\}} \\
 # & | & const + const \\
 # & | & const - const \\
 # & | & const * const \\
@@ -36,12 +37,9 @@
 # & | & const ~//~ const \\
 # & | & const ~\%~ const \\
 # & | & - const \\
-# & | & const . const \\
 # & | & \mathbf{true} \\
 # & | & \mathbf{false} \\
-# & | & \mathbf{null} \\
-# expr & ::= & \mathbf{&lt;?php} ~ code ~ \mathbf{?&gt;} \\
-# & | & const.
+# & | & \mathbf{null}.
 # \end{eqnarray}$$
 
 # ## Super Syntax

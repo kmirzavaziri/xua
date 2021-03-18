@@ -116,6 +116,10 @@
 # # Etc
 # Any other configuration that is not directly related to one project is stored under the node `etc`.
 
+# ## constants
+# There can be a directory of json files in the source project, known as `constants`. We must mention the directory name in the configs so XUA can find defined constants there. The default value of `"constants"` is assumed if the node is not provided. Read more about how to use this feature in chapter [Constants](Constants.html).
+#    "constants": "constants"
+
 # ## database
 # Currently, XUA only supports MySQL database server. Therefore node `database` under node `etc` can only have one child called `mysql`. The structure is very simple.
 #    "database": {
@@ -130,99 +134,100 @@
 # -- #########################################
 # # Full Structure
 # After reading about the structure of each part, we reach the full structure of a `config.json` file.
-{
-    "server": {
-        "php": {
-            "destination-dir": "public_html",
-            "quick": true,
-            "resources": {
-                "public": [
-                    "resources/public"
-                ],
-                "private": [
-                    "resources/private"
-                ]
-            },
-            "services": "Services/php"
-        }
-    },
-    "marshal": {
-        "dart": {
-            "destination-dir": "marshal/dart",
-            "quick": false,
-            "resources": [
-                "resources"
-            ],
-            "services": "services/dart"
-        },
-        "java": {
-            "destination-dir": "marshal/java",
-            "quick": false,
-            "resources": [
-                "resources"
-            ],
-            "services": "services/java"
-        },
-        "javascript": {
-            "destination-dir": "marshal/javascript",
-            "quick": false,
-            "resources": [
-                "resources"
-            ],
-            "services": "services/javascript"
-        },
-        "kotlin": {
-            "destination-dir": "marshal/kotlin",
-            "quick": false,
-            "resources": [
-                "resources"
-            ],
-            "services": "services/kotlin"
-        },
-        "objectivec": {
-            "destination-dir": "marshal/objectivec",
-            "quick": false,
-            "resources": [
-                "resources"
-            ],
-            "services": "services/objectivec"
-        },
-        "swift": {
-            "destination-dir": "marshal/swift",
-            "quick": false,
-            "resources": [
-                "resources"
-            ],
-            "services": "services/swift"
-        }
-    },
-    "doc": {
-        "latex": {
-            "destination-dir": "doc/latex",
-            "quick": false,
-            "resources": [
-                "resources"
-            ],
-            "default-template": "templates/template.tex",
-            "build-pdf": true
-        },
-        "html": {
-            "destination-dir": "doc/html",
-            "quick": false,
-            "resources": [
-                "resources"
-            ],
-            "default-template": "templates/template.html",
-            "build-pdf": false
-        }
-    },
-    "etc": {
-        "database": {
-            "mysql": {
-                "hostname": "localhost",
-                "username": "root",
-                "password": ""
-            }
-        }
-    }
-}
+#    {
+#        "server": {
+#            "php": {
+#                "destination-dir": "public_html",
+#                "quick": true,
+#                "resources": {
+#                    "public": [
+#                        "resources/public"
+#                    ],
+#                    "private": [
+#                        "resources/private"
+#                    ]
+#                },
+#                "services": "Services/php"
+#            }
+#        },
+#        "marshal": {
+#            "dart": {
+#                "destination-dir": "marshal/dart",
+#                "quick": false,
+#                "resources": [
+#                    "resources"
+#                ],
+#                "services": "services/dart"
+#            },
+#            "java": {
+#                "destination-dir": "marshal/java",
+#                "quick": false,
+#                "resources": [
+#                    "resources"
+#                ],
+#                "services": "services/java"
+#            },
+#            "javascript": {
+#                "destination-dir": "marshal/javascript",
+#                "quick": false,
+#                "resources": [
+#                    "resources"
+#                ],
+#                "services": "services/javascript"
+#            },
+#            "kotlin": {
+#                "destination-dir": "marshal/kotlin",
+#                "quick": false,
+#                "resources": [
+#                    "resources"
+#                ],
+#                "services": "services/kotlin"
+#            },
+#            "objectivec": {
+#                "destination-dir": "marshal/objectivec",
+#                "quick": false,
+#                "resources": [
+#                    "resources"
+#                ],
+#                "services": "services/objectivec"
+#            },
+#            "swift": {
+#                "destination-dir": "marshal/swift",
+#                "quick": false,
+#                "resources": [
+#                    "resources"
+#                ],
+#                "services": "services/swift"
+#            }
+#        },
+#        "doc": {
+#            "latex": {
+#                "destination-dir": "doc/latex",
+#                "quick": false,
+#                "resources": [
+#                    "resources"
+#                ],
+#                "default-template": "templates/template.tex",
+#                "build-pdf": true
+#            },
+#            "html": {
+#                "destination-dir": "doc/html",
+#                "quick": false,
+#                "resources": [
+#                    "resources"
+#                ],
+#                "default-template": "templates/template.html",
+#                "build-pdf": false
+#            }
+#        },
+#        "etc": {
+#            "constants": "constants",
+#            "database": {
+#                "mysql": {
+#                    "hostname": "localhost",
+#                    "username": "root",
+#                    "password": ""
+#                }
+#            }
+#        }
+#    }

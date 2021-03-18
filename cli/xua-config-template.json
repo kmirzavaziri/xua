@@ -45,6 +45,7 @@
         }
     },
     "etc": {
+        "constants": "constants",
         "database": {
             "mysql": {
                 "hostname": "localhost",

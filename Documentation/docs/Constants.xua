@@ -1,0 +1,167 @@
+# XUA Documentation - Constants
+# Kamyar Mirzavaziri
+# Winter 1399
+
+# Doc Constants
+    # @python doc.constants.TITLE = "Constants;"
+    # @python doc.constants.SUBTITLE = "A Tiny Bit of Computation"
+
+# Doc Configurations
+    # @python doc.renderComments = "doc"
+    # @python doc.renderCodes = "pure"
+
+# -- #########################################
+# # Introduction
+
+# Constants have really minor usages in XUA e.g. setting default value, passing values to supers, use in config file, or any other situation when we need to mention a value. Constants in XUA are quite similar to what other languages call expressions. But the point of constants is being totally deterministic. Constant values are completely computable by only reading the source code, and nothing will affect the values during runtime. There is no usage of nondeterministic expressions in XUA syntax, and constants help catching more errors during runtime, therefore XUA only supports constants.
+
+# It's possible to configure the project to interpret a directory as constants. Then the json files in that directory are considered as defined constants which we can refer to. There are also some operations available on constants. This may seem redundant since the evaluating value is already known, but this feature helps with cleaner codes. For example it's really cleaner and easier to write and read to say `15 * 60` seconds instead of `900` seconds. So XUA does a tiny bit of computation to multiply `15` by `60`, but actually there is no actual computation and the result is already known.
+
+# XUA constants are available to use in json files, including `config.json` and even the constant files themselves. To use this feature, the value must be provided as a string that starts with `@xua` and then contains an expression.
+
+# -- #########################################
+# # Syntax
+# XUA follows the json syntax for values.
+
+# ## Numbers
+
+# ### Syntax
+# There is nothing more trivial than writing a number, but there are some things you may didn't know about numbers in json. A number can start with `-` or `+` sign, followed by a series of digits, then it can have a radix point `.` and another series of number, and json also supports scientific notation which means then the number can continue with the letter `E` or `e` and then may have a `+` or `-` and then another series of digits.
+
+# ### Operations
+# There is set of simple operations available for numeric values.
+
+# #### Summation
+# The expression `a + b` evaluates to the sum of `a` and `b`.
+
+# #### Subtraction
+# The expression `a - b` evaluates to `a` minus `b`.
+
+# #### Multiplication
+# The expression `a * b` evaluates to `a` times `b`.
+
+# #### Division
+# The expression `a / b` evaluates to `a` divided by `b`.
+
+# #### Exponentiation
+# The expression `a ^ b` evaluates to `a` raised to the power of `b`.
+
+# #### Integer Division
+# The expression `a // b` evaluates to the quotient of `a` by `b`.
+
+# #### Modulation
+# The expression `a // b` evaluates to the remainder of `a` by `b`.
+
+# #### Additive Inverse
+# The expression `-a` evaluates to the `0 - a`.
+
+# ### Example
+# The expression `--1.1 ^ 365` evaluates to `1.28330558e15`. 
+
+# ## Strings
+
+# ### Syntax
+# Since we are trying to stick with json syntax, strings are contained in a couple of `"`, and can contain escape characters, but `'` is not permitted.
+
+# ### Operations
+# The only operation for strings is concatenation.
+
+# #### Concatenation
+# The expression `a + b` evaluates to the concatenation of `a` and `b`.
+
+# ### Example
+# The expression `"Hello John!\n" + "\t//\"Such a nice day.\"\\\\"` evaluates to the following value.
+#    Hello John!
+#        //"Such a nice day."\\
+
+# ## Boolean and Null Values
+
+# ### Syntax
+# Symbols `true`, `false`, and `null` are reserved (case-insensitive) for boolean and null values and cannot be used for naming any other object.
+
+# ## Lists
+
+# ### Syntax
+# Lists follow json array syntax.
+#    [
+#        listItem0,
+#        ...,
+#        listItemN
+#    ]
+
+# But it's permitted to leave a comma at the end.
+#    [
+#        listItem0,
+#        ...,
+#        listItemN,
+#    ]
+
+# ### Operations
+# The only operation for strings is concatenation.
+
+# #### Concatenation
+# The expression `a + b` evaluates to the concatenation of `a` and `b`.
+
+# ### Example
+# The expression `[42.42] + [] + ['Hello', 'world']` evaluates to `[42.42, 'Hello', 'world']`.
+
+# ## Maps
+
+# ### Syntax
+# Maps in our terminology are actually objects in json terminology, and follow the same syntax.
+#    [
+#      "mapKey0": mapValue0,
+#      ...,
+#      "mapKeyN": mapValueN
+#    ]
+
+# Similar to lists, it's permitted to leave a comma at the end.
+#    [
+#      "mapKey0": mapValue0,
+#      ...,
+#      "mapKeyN": mapValueN,
+#    ]
+
+# ### Operations
+# The only operation for strings is merge.
+
+# #### Merge
+# The expression `a + b` evaluates to the merging result of `a` and `b`. The order of operands is important in this operation, i.e. `a + b` differs from `b + a`, since the latter map overrides the existing data from the former map.
+
+# ### Example
+# The expression `{"firstName": "John"} + {"lastName": "Doe"} + {"firstName": "Jane"}` evaluates to `{"firstName": "Jane", lastName: "Doe"}`.
+
+# ## Referral Constant
+
+# ### Syntax
+# The referral constants are accessible by mentioning the json file path relative to constants directory and then the object address. Something like
+#    path\to\json\file\propertyName\childPropertyName
+
+# ### Example
+# For example let's say that we have a json file `constants/credentials/mysql.json` to manage different credentials on local, demo, and production environments. The content is the following.
+#    {
+#        "host": {
+#            "name": "localhost",
+#            "port": "3306"
+#        }
+#        "user": {
+#            "name": "root",
+#            "pass": ""
+#        }
+#    }
+
+# Now to get the value of `password` we may write the following expression.
+#    credentials\mysql\user\pass
+
+# A more complicated wish would be to get the full host name.
+#    credentials\mysql\host\name + ':' + credentials\mysql\host\port
+# which will evaluate to `localhost:3306`.
+
+# Now we can use these values in the `config.json` file.
+#    "database": {
+#        "mysql": {
+#            "hostname": "@xua credentials\mysql\host\name + ':' + credentials\mysql\host\port",
+#            "username": "@xua credentials\mysql\user\name",
+#            "password": "@xua credentials\mysql\user\pass"
+#        }
+#    }
