@@ -277,17 +277,17 @@ Super (
 #    }
 # But we can make it a little more sophisticated by providing a reason of why the value may fail to fit.
 #    Predicate {
-#        if (! $this->args['start'] <= $input) {
-#            $reason = $input . ' is less than ' . $this->args['start'];
+#        if (!($this->args['start'] <= $input)) {
+#            $message = $input . ' is less than ' . $this->args['start'];
 #            return false;
 #        }
-#        if (! $input < $this->args['end']) {
-#            $reason = $input . ' is not less than ' . $this->args['end'];
+#        if (!($input < $this->args['end'])) {
+#            $message = $input . ' is not less than ' . $this->args['end'];
 #            return false;
 #        }
 #        return true;
 #    }
-# Note that it's OK to fill the $reason when the return value is `true`. XUA automatically clears the `$reason` in that case.
+# Note that it's OK to fill the $reason when the return value is `true`. XUA automatically clears the `$message` in that case.
 
 
 # #### Marshal and Unmarshal
@@ -470,7 +470,7 @@ Super extends Supers\Integers\Range (
 #        'unmarshal' => '30 is not less than 30',
 #        'unmarshalDatabase' => '40 is not less than 30',
 #    ]
-# The $reason can work like a log, for example we try the code above with `5`, and get the following.
+# The `$reason` variable can work like a log, for example we try the code above with `5`, and get the following.
 #    [
 #        'identity' => '5 is less than 10',
 #        'unmarshal' => '5 is less than 10',
@@ -496,14 +496,14 @@ Super (
             $choices = ['male', 'female', 'third'];
         }
 
-        $reason = '$input is not in ' . implode(", ", $choices);
+        $message = '$input is not in ' . implode(", ", $choices);
         return in_array($input, $choices);
 
     }
 }
 # @python doc.renderComments = "doc"
 
-# Note how we set the `$reason` without caring about the return value. XUA automatically clears the `$reason` if the return value is `true`.
+# Note how we set the `$message` without caring about the return value. XUA automatically clears the `$message` if the return value is `true`.
 
 # -- #########################################
 # # Good News
