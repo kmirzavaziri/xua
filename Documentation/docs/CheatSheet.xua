@@ -12,7 +12,6 @@
 
 # -- #########################################
 # # Templates
-
 # Create a new XUA project in the current directory.
 #    xua new project PROJECT_NAME
 
@@ -34,7 +33,6 @@
 
 # -- #########################################
 # # Build
-
 # The argument `PATH` in the following commands can be a file name or directory name, if you leave it empty, the xua engine will build all files inside project, unless you set `-c` or `--changes` flag which builds all the files that are changed from last build.
 
 # Build a specific project.
@@ -50,7 +48,6 @@
 
 # -- #########################################
 # # Deploy
-
 # Just like build, the argument `PATH` in the following commands can be a file name or directory name, if you leave it empty, `xua-ext` will deploy all files inside project, unless you set `-c` or `--changes` flag which deploys all the files that are changed from last build.
 
 # It's possible to config `xua-ext` to deploy on several environments, which you can define in `.xua-ext/settings.json`, programmers usually work with two environments called `demo` and `production`, you can have a different deploy procedure for each environment.
@@ -71,7 +68,6 @@
 # # Clean
 
 # ## Local Clean
-
 # Clean a project from files with no source file and are not marked as [resource files](Units.html#Resource_Files) in `config.json`.
 #    xua clean PROJECT
 
@@ -82,7 +78,6 @@
 #    xua clean all
 
 # ## Remote Clean
-
 # Clean a project located on `ENV` from files with no source file and are not marked as [resource files](Units.html#Resource_Files) in `config.json`.
 #    xua-ext clean PROJECT ENV
 
@@ -91,3 +86,9 @@
 
 # Clean all projects located on `ENV` from files with no source file and are not marked as [resource files](Units.html#Resource_Files) in `config.json`.
 #    xua-ext clean all ENV
+
+# -- #########################################
+# # Methods as Commands
+# XUA extension made it possible to call XUA methods as commands via cli. To call a method on specific environment, use
+#    xua-ext call [ENV] Path.To.Method.MethodName argName0=actualValue0 ... argNameN=actualValueN
+# If `ENV` is not specified, the command will run on local host.

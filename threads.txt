@@ -1,0 +1,22 @@
+[ ] Documentation
+[*] Command Line Interface
+[ ] Language Server Protocol
+[ ] Compiler Procedure
+[*]     Server Project
+[*]         Super
+[*]         Entity
+[*]         Method
+[*]         Interface
+[*]         Base Codes
+[*]         Predefined Codes
+[ ]     Marshal Library
+[ ]         Dart
+[ ]         Java
+[ ]         JavaScript
+[ ]         Kotlin
+[ ]         Objective-C
+[ ]         Swift
+[ ]     Documentation
+[*] Clean Procedure
+[*] Deploy Procedure
+[ ] Extension Development

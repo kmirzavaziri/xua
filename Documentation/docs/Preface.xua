@@ -35,14 +35,16 @@
 
 # Currently, XUA tools are only available on linux.
 
-# - Python 3, is required to build projects and make templates.
+# - Python 3 is required to build projects and make templates.
 
-# - The PHP Engine and a PHP Server, is recommended for test and debug on local server.
+# - The PHP Engine and a PHP Server is recommended for test and debug on local server.
 
-# - MySQL Server, is recommended for test and debug on local server.
+# - MySQL Server is recommended for test and debug on local server.
+
+# - DataGrip is recommended for watching data to test and debug.
 
 # - VSCode, is recommended with XUA extension installed to code in XUA language. Although it's not
-# a necessity, but the extension will help with code correction and autocomplete as well as making the build process easier. 
+# a necessity, but the extension will help with code correction and autocomplete as well as making the build, deploy, and clean processes easier. 
 
 # ## Getting Started
 

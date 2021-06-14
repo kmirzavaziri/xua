@@ -55,7 +55,24 @@
 
 # ## Entity Syntax
 # $$\begin{eqnarray}
-# entity & ::= & \\
+# entity & ::= & \mathbf{Entity} ~ [\mathbf{extends} ~ \text{ID}] ~ ( ~ [\![ \text{ID} : type ~ [= ~ const]; ]\!]^* ~ )
+# ~ \{ [\![ entity\_content ]\!]^* \} \\
+# entity\_content & ::= & \mathbf{Indexes} ~ \{ ~ [\![ \text{ID} :
+# ids\_list ; ]\!]^*
+# [*] ~ \} \\
+# & | & \mathbf{Validation} ~ \{ ~ code ~ \} \\
+# & | & \mathbf{Override}<
+# entity\_method
+# > ~ \{ ~ code ~ \} \\
+# ids\_list & ::= & \mathbf{(} [\![ ID, ]\!]^* \mathbf{)} \\
+# & | & \mathbf{(} ID ~ [\![ , ID ]\!]^* \mathbf{)} \\
+# entity\_method & ::= & \mathbf{newInstance} \\
+# & | & \mathbf{getOne} \\
+# & | & \mathbf{store} \\
+# & | & \mathbf{markToDelete} \\
+# & | & \mathbf{getMany} \\
+# & | & \mathbf{setMany} \\
+# & | & \mathbf{deleteMany}.
 # \end{eqnarray}$$
 
 # ## Method Syntax

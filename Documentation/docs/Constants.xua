@@ -162,6 +162,7 @@
 #        "mysql": {
 #            "hostname": "@xua credentials\mysql\host\name + ':' + credentials\mysql\host\port",
 #            "username": "@xua credentials\mysql\user\name",
-#            "password": "@xua credentials\mysql\user\pass"
+#            "password": "@xua credentials\mysql\user\pass",
+#            "database": "xua_db"
 #        }
 #    }

@@ -75,7 +75,24 @@ super\_content & ::= & \mathbf{Validation} ~ \{ ~ code ~ \} \\
 & | & \mathbf{DatabaseType} ~ \{ ~ code ~ \}.
 \end{eqnarray}$$</div><div class = 'comment'><a href='#Entity_Syntax'><h2 class='h2' id='Entity_Syntax'> Entity Syntax</h2></a>
 $$\begin{eqnarray}
-entity & ::= & \\
+entity & ::= & \mathbf{Entity} ~ [\mathbf{extends} ~ \text{ID}] ~ ( ~ [\![ \text{ID} : type ~ [= ~ const]; ]\!]^* ~ )
+~ \{ [\![ entity\_content ]\!]^* \} \\
+entity\_content & ::= & \mathbf{Indexes} ~ \{ ~ [\![ \text{ID} :
+ids\_list ; ]\!]^*
+[*] ~ \} \\
+& | & \mathbf{Validation} ~ \{ ~ code ~ \} \\
+& | & \mathbf{Override}<
+entity\_method
+> ~ \{ ~ code ~ \} \\
+ids\_list & ::= & \mathbf{(} [\![ ID, ]\!]^* \mathbf{)} \\
+& | & \mathbf{(} ID ~ [\![ , ID ]\!]^* \mathbf{)} \\
+entity\_method & ::= & \mathbf{newInstance} \\
+& | & \mathbf{getOne} \\
+& | & \mathbf{store} \\
+& | & \mathbf{markToDelete} \\
+& | & \mathbf{getMany} \\
+& | & \mathbf{setMany} \\
+& | & \mathbf{deleteMany}.
 \end{eqnarray}$$</div><div class = 'comment'><a href='#Method_Syntax'><h2 class='h2' id='Method_Syntax'> Method Syntax</h2></a>
 $$\begin{eqnarray}
 method & ::= & \\

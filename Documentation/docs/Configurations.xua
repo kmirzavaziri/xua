@@ -126,7 +126,8 @@
 #        "mysql": {
 #            "hostname": "localhost",
 #            "username": "root",
-#            "password": ""
+#            "password": "",
+#            "database": "xua_db"
 #        }
 #    }
 
@@ -226,7 +227,8 @@
 #                "mysql": {
 #                    "hostname": "localhost",
 #                    "username": "root",
-#                    "password": ""
+#                    "password": "",
+#                    "database": "xua_db"
 #                }
 #            }
 #        }

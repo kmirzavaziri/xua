@@ -305,4 +305,50 @@ class HtmlGenerator:
         # List
         # TODO
 
+        # Table
+        def table(x):
+            width = None
+            rows = []
+            for row in x.group(0).strip().splitlines():
+                row = row.split('|')[1:-1]
+                row = [cell.strip() for cell in row]
+                if width is None:
+                    width = len(row)
+                else:
+                    if width != len(row):
+                        return x.group(0)
+                rows.append(row)
+            directions = []
+            for cell in rows[1]:
+                direction = ''
+                if cell.startswith(':') and cell.endswith(':'):
+                    direction = 'center'
+                if cell.startswith(':') and not cell.endswith(':'):
+                    direction = 'left'
+                if not cell.startswith(':') and cell.endswith(':'):
+                    direction = 'right'
+                if not cell.startswith(':') and not cell.endswith(':'):
+                    direction = 'left'
+                directions.append(direction)
+            del rows[1]
+            head = rows[0]
+            del rows[0]
+            return f"""
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            {" ".join([f"<th style='text-align: {directions[i]}'>{head[i]}</th>" for i in range(width)])}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {" ".join(["<tr>" + " ".join([f"<td style='text-align: {directions[i]}'>{row[i]}</td>" for i in range(width)]) + "</tr>" for row in rows])}
+                    </tbody>
+                </table>
+            """
+        statement = re.sub(
+            r"(\s*\|(.*\|)+\s*)(\s*\|(\s*:?---+:?\s*\|)+\s*)(\s*\|(.*\|)+\s*)*",
+            table,
+            statement
+        )
+
         return statement

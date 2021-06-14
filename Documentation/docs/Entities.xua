@@ -1,0 +1,553 @@
+# XUA Documentation - Entities
+# Kamyar Mirzavaziri
+# Winter 1399
+
+# Doc Constants
+    # @python doc.constants.TITLE = "Entities;"
+    # @python doc.constants.SUBTITLE = "The Beating Heart"
+
+# Doc Configurations
+    # @python doc.renderComments = "doc"
+    # @python doc.renderCodes = "pure"
+
+# -- #########################################
+# # Introduction
+# XUA can be configured to communicate with a database server (usually MySQL), but the programmer needs to specify the database structure. To do so, XUA offers Entity Blocks. Read [Entities](Units.html#Entities) section under [Units](Units.html) chapter for theoretical explanations. In this chapter, we focus on practical details of defining and using entities.
+
+# ## Effects on the projects
+# XUA will generate a PHP class extending a XUA abstract class called `\XUA\Entity` for each Entity Block the programmer creates. these Entity classes are in a one-to-one relationship with database tables. Each row of the table then, can be corresponded by an instance of the table’s corresponding class.
+
+# Also the same happens in the marshal library with respect to the language. But the front-end clone of the entities only contains method signatures, and the bodies are just network calls.
+
+# ## Terminology
+
+# ### Server Project Side
+# A __field__ $(T, D)$ is a tuple of a type (described in [Supers](Supers.html) chapter) called __field type__ and a value called __field default value__.
+
+# An __entity signature__ is a set of labeled fields $F$ such that $F(s) = (T_s,
+# D_s)$ or $F(s)$ is undefined, where $s$ is a __field name__. Domain of $F$ is called set of filed names of the entity signature.
+
+# An __index__ is a $k$-tuple of field names with an extra boolean determining if the index is __unique__. Indexes are used in MySQL engine for faster `select` queries. We try to have a simple explanations here. Assume fields $(u, f_0, \dots,
+# f_n)$ are marked as index
+# $i_0$.
+# The MySQL engine will create a list of pointers to data rows, sorted by the mentioned field, which makes it faster to search on those fields. Also if the index is marked as unique, i.e., $u = 1$, the combination of fields must be unique in data, i.e., we cannot have two rows with same value of $f_0$,
+# same value of $f_1$,
+# ..., and
+# same value of $f_n$.
+
+# An __entity indexes__ is a set of labeled indexes $I$ such that $I(s) = (u, f_{s0}, \dots
+# f_{sn})$ or $I(s)$ is undefined, where $s$ is a __index name__. Domain of $I$ is called set of index names of the entity signature.
+
+# An __entity validation__ is a function with no output, that inputs a data row and checks if the data is valid. In case of invalid data, an exception is thrown. For example assume we store data about some events, each event has two fields `start_time` and
+# `end_time`, and the start must be sooner than end. The entity validation checks if this condition holds, and if end is sooner than start, it will throw an exception.
+
+# An __entity class__ is a triplet $(F, I, V)$ of fields, indexes, and validation function.
+
+# An __entity instance__ is an instance of an entity class, which contains actual values for entity fields.
+
+# ### MySQL Side
+# A __database__ is a set of __table__s, each table has a __structure__ consisting of __column__s, and a set of __row__s as __data__.
+
+# __insert__ is action of adding new rows to a table.
+
+# __select__ is action of retrieving rows from a table on some specific conditions.
+
+# __update__ is action of modifying some rows of a table on some specific conditions.
+
+# __delete__ is action of removing some rows of a table on some specific conditions.
+
+# ### Correspondence
+# Each __table__ is in one-to-one correspondence with an __entity class__. Methods of these classes are able to communicate with database server to select, insert, update, and delete data. __Field__s of the entity class represent the __column__s of the table, and __instance__s of the class represent the __row__s of the table. 
+
+# 
+
+# -- #########################################
+# # Definition
+
+# ## Structure
+# An entity block has the following structure.
+
+#    # Path\To\Entity\EntityName
+#     
+#    # Description of what this Entity is all about, probably in markdown formatting.
+#    # etc.
+#     
+#    Entity [extends Path\To\Another\Entity\EntityName] (
+#        field0 : Type0 [= DEFAULT_0]; # Description of field0
+#        ...                         ; # ...
+#        fieldN : TypeN [= DEFAULT_0]; # Description of fieldN
+#    ) {
+#        [Indexes : {
+#            ([-]filedName00, ..., [-]fieldName0K)[*]; # Description of index number 0
+#            ...                                     ; # ...
+#            ([-]filedNameM0, ..., [-]fieldNameML)[*]; # Description of index number M
+#        }]
+#        [ Validation : { VALIDATION_BODY } ]
+#        [ Override<METHOD_NAME_0> { METHOD_0_BODY } ]
+#        ...
+#        [ Override<METHOD_NAME_P> { METHOD_P_BODY } ]
+#    }
+
+# Note that there is no name for the entity. An entity name is it's file path. Each file can contain at most 1 block and the block name is inherited form the file. It's a good practice to have a comment in first line of file, describing where the file is located.
+
+# __Note:__ All entities have a read-only field called `id`, of type integer, that is defined implicitly. The field `id` is used in some underlying XUA codes and cannot be removed.
+
+# ## Fields
+# Each entity represents an object class and is used to store properties of an object instance as data in database. The object can have different properties each with their own type and default value. each of these properties is called a field and should be defined with it's type and default value in the fields part.
+
+# ## Indexes
+# An index is a list of fields along with a boolean determining if the index is unique. Indexes are used in MySQL engine for faster `select` queries. A `*` sign at the end of an index definition makes it a unique index. If the index is marked as unique, the combination of fields must be unique in data. Note that the implicit field `id` is a unique field by default under.
+
+# ## Validation
+# The body of `Validation` block is written in pure PHP. 
+
+# The `Validation` block is responsible to check if an instance of the entity is valid, and in case of invalid data, an `EntityValidationException` must be thrown. For example assume we have a table of restaurants in an entity called `Restaurant`. This entity has two fields `title` and `active`. The `title` field is unique but it's not possible to mark it as unique index in `Indexes`, because we can have many inactive rows sharing a same title, and the title is unique among the active restaurants. We can check this in `Validation` block and throw a `EntityValidationException` if the title is duplicate.
+
+# ## Overriding Methods
+# XUA generates a PHP class from each entity, extending `\XUA\Entity`. This class have many methods which are possible to override. Here is a list of these methods, with the PHP method that is actually being overridden.
+#    Override<newInstance>  => protected static newInstance(string $caller);
+#    Override<getOne>       => protected static _getOne(string $caller, Condition $condition, Order $order);
+#    Override<store>        => protected _store(string $caller);
+#    Override<markToDelete> => protected _markToDelete(string $caller);
+#    Override<getMany>      => protected static _getMany(string $caller, Condition $condition, Order $order, Pager $pager);
+#    Override<setMany>      => protected static _setMany(string $caller, array $changes, Condition $condition, Order $order, Pager $pager);
+#    Override<deleteMany>   => protected static _deleteMany(string $caller, Condition $condition, Order $order, Pager $pager);
+# So for example if someone needs to override `store` procedure, it's possible to add the following code to the body of the entity block.
+#    Override<store> {
+#        if (isset(static::fields()['updatedAt']))
+#        $this->updatedAt = DateTimeService::now();
+#        try {
+#            parent::store();
+#            LogService::logDatabaseChange($this);
+#        } catch (Exception as $e) {
+#            LogService::logDatabaseException($e);
+#        }
+#    }
+# Usually the original methods suffice and there is no need to override them, but in case of necessity, be careful not to corrupt the functionality.
+
+# ## Hierarchy
+# Entities can come in a hierarchy just like PHP classes, and the `Validation` block is a class method.
+#    protected function _validation();
+
+# Also the fields and indexes of child entity override the ones in parent. This override includes type and default value. Also it's possible to add new fields or indexes to the type, but it's not possible to remove existing fields. Read [Examples](#Examples) for more details.
+
+# ## Visibility
+# The visibility of entities is controlled by overriding methods. There is an additional variable accessible in all methods including validation, called `$caller`. This variable contains an string telling what module called this method. The values are accessible as class constants in class `XUA\Tools\Visibility`. These values are `Visibility::CALLER_PHP`,
+# `Visibility::CALLER_DART`, etc.
+
+# So it's possible to block foreign callers like the following.
+#    if ($caller != Visibility::CALLER_PHP) {
+#        return $this;
+#    }
+# But there is more than this. It's possible to customize procedures according to the caller. For example
+#    if ($caller != Visibility::CALLER_PHP) {
+#        if ($this->id) {
+#            if (!UserService::hasAccess(AccessService::ModifySomeEntity)) {
+#                return $this;
+#            }
+#        } else
+#            if (!UserService::hasAccess(AccessService::CreateSomeEntity)) {
+#                return $this;
+#            }
+#        }
+#    }
+#    $this->updatedByProject = $caller;
+
+# -- #########################################
+# # Helpers
+
+# ## Auto-Generated Field Types
+# In addition to defined supers that can be called to generate type for field types, there are some auto-generated supers developers can use.
+
+# ### Relational Supers
+# For each entity block that is defined, a relational super is implicitly generated by XUA. This Super has the following signature.
+#    EntityName (
+#      relation : EntityRelationType();
+#      cardinalName : Symbol(nullable = true) = null;
+#      invName : Symbol(nullable = true) = null;
+#      invCardinalName : Symbol(nullable = true) = null;
+#      nullable : Boolean() = false;
+#      invNullable : Boolean() = false;
+#    )
+# These Supers create a relation between two entities. The first argument can only have one of the following values, and based on that, there are some limitations for other arguments.
+# | Relation                | Title        | Limitations                                    |
+# | ----------------------- | :----------: | ---------------------------------------------- |
+# | `XUA\EntityRelation::II`| One to One   | `CardinalName = null; invCardinalName = null;` |
+# | `XUA\EntityRelation::IN`| One to Many  | `nullable = false; invCardinalName = null;`    |
+# | `XUA\EntityRelation::NI`| Many to One  | `CardinalName = null; invnullable = false;`    |
+# | `XUA\EntityRelation::NN`| Many to Many | `nullable = false; invnullable = false;`       |
+
+# Let’s say in `LeftEntity`, there is a filed called `relationalField` of type `RightEntity`. The following default values are provided for `cardinalName`, `invName`, and `invCardinalName`, under the mentioned conditions.
+
+# | Argument | Default Value | Conditions |
+# | -------- | ------------- | ---------- |
+# | `cardinalName` | `'relationalField' + 'Count'` | `relation == XUA\EntityRelation::IN  or relation == XUA\EntityRelation::NN` |
+# | `invName` | `'inv' + 'RelationalField'` (Note CamelCasing the `relationalField`) | Any conditions |
+# | `invCardinalName` | `invName + 'Count'` | `relation == XUA\EntityRelation::NI or relation == XUA\EntityRelation::NN` |
+
+# ### Virtual Field Supers
+
+# ## Condition Class
+
+# ## Order Class
+
+# ## Pager Class
+
+# -- #########################################
+# # Practicalities
+
+# ## Deploy & Alters
+# When a new entity is created, or an entity is modified, these changes should be synced with the mysql server. The deploy procedure adds new created entities as tables to the database, and also generates `ALTER` queries for modified entities. The deploy procedure does not run the alters by itself, instead, it prints out the alters; which are possible to run by the programmer or another person in charge. It's possible to complete the deploy process with the undone alters. This process is called _force deploy_, and the alters which are possible to ignore while deploying are called _force-friendly alters_.
+
+# -- #########################################
+# # Usage
+# It's possible to use a defined entity in both server project (PHP language) and front-end native codes via marshal library, but not in XUA language.
+
+# ## Inside PHP
+
+# ### Make a type
+# The following code makes a type by giving arguments to a super.
+#    $type = new Path\To\Super\SuperName([
+#        'argName0' => $value0,
+#        ...,
+#        'argNameN' => $valueN,
+#    ]);
+
+# ### Determine a type
+# Assume a type is given in a variable and we need to know what type is it. We can try to find the class of the object but what about arguments? It's almost impossible to get the type accurate unless we have a method for that. The following method returns a string that describes the type.
+#    var_dump($type->toString());
+# This code dumps `'Path\To\Super\SuperName(argName0 = value0, ..., argNameN = valueN)'`.
+
+# ### Accepts, Implicit & Explicit
+# There are three `accepts` functions for a type.
+
+# #### explicitlyAccepts
+# This function will return true only if the value explicitly fits in the type. The second argument is optional, and if the return value is false, the function may fill it with a reason.
+#    if ($type->explicitlyAccepts($value, $reason)) {
+#        var_dump($value);
+#        echo 'is of type ' . $type->toString();
+#    } else {
+#        echo 'rejected because of' . $reason;
+#    }
+
+# #### implicitlyAccepts
+# This function will return true if the value explicitly fits in the type or, fits in the type after unmarshaling. The unmarshaling methods must be determined by caller. The function tries the value itself first, then tries to unmarshal and check if the value fits by given methods, one by one. If not passed to the function, the default value `['unmarshal', 'unmarshalDatabase']` is assumed.
+#    if ($type->implicitlyAccepts($value, $reasons, ['unmarshal'])) {
+#        var_dump($value);
+#        echo 'kinda fits in type ' . $type->toString();
+#    } else {
+#        echo 'fully rejected because of the following reasons';
+#        var_dump($reasons);
+#    }
+
+# #### accepts
+# This function does the same job of `implicitlyAccepts`, but may alter the original value while trying to fit it in the type.
+#    $originalValue = $value;
+#    if ($type->accepts($value, $reasons, ['unmarshal'])) {
+#        var_dump($originalValue);
+#        echo 'was changed to';
+#        var_dump($value);
+#        echo 'to fit in type ' . $type->toString();
+#    } else {
+#        echo 'fully rejected because of the following reasons';
+#        var_dump($reasons);
+#    }
+
+# ### Marshal & Unmarshal
+# There are two types of marshal and unmarshal functions available in the server project.
+
+# #### Network transmissions
+# Functions `marshal` and `unmarshal` are responsible to marshal and unmarshal values for purpose of network transmissions.
+#    $marshaledValue = $type->marshal($value);
+#    $reversedValue = $type->unmarshal($marshaledValue);
+#    if ($value !== $reversedValue) {
+#        var_dump('something is wrong with marshal/unmarshal functions of ' . $type->toString());
+#    }
+
+# #### Database Storing & Restoring
+# Functions `marshalDatabase` and `unmarshalDatabase` are responsible to marshal and unmarshal values for purpose of storing and restoring into/from database.
+#    $marshaledValue = $type->marshalDatabase($value);
+#    $reversedValue = $type->unmarshalDatabase($marshaledValue);
+#    if ($value !== $reversedValue) {
+#        var_dump('something is wrong with marshalDatabase/unmarshalDatabase functions of ' . $type->toString());
+#    }
+
+# ### Database Type
+# The function `DatabaseType` is a function with no arguments that returns an string which tells the database how the type values must be stored. And is hardly useful in programming.
+
+# ## Inside XUA
+# The main usage of supers is to declare types for XUA super arguments, entity fields, and method request and response signatures. To mention a type, one must call a super and give it arguments. The type then, can be used for type declaration. The syntax is the following.
+#    Path\To\Super\SuperName(
+#        argName0 = constant0,
+#        ...,
+#        argNameN = constantN,
+#    )
+
+# -- #########################################
+# # Examples
+
+# ## Range
+# In this section, we want to work with a super type that accepts a range of integers $[a, b)$.
+
+# ### Definition
+# First of all, we need to define the super. we put it in the file `Supers/Integers/Range.xua`.
+
+# #### Arguments
+# We need to have two arguments determining start and end of the range. The arguments must be integer themselves.
+
+# @python doc.renderComments = "pure"
+# Supers\Integers\Range
+Super (
+    start : Supers\Integers\Integer();
+    end   : Supers\Integers\Integer();
+) {
+    # TODO implement
+}
+# @python doc.renderComments = "doc"
+
+# #### Validation
+# For the validation, we must check that the second number is not less than the first one. Note that we do not need to check if the type of arguments is integer since we already declared their type so the type checking is automated.
+#    Validation {
+#        if ($this->args['end'] < $this->args['start']) {
+#            throw new SuperValidationException('Argument end cannot be less than start.');
+#        }
+#    }
+
+# #### Predicate
+# We can just simply check if the `$input` value is in the range.
+#    Predicate {
+#        return $this->args['start'] <= $input && $input < $this->args['end'];
+#    }
+# But we can make it a little more sophisticated by providing a reason of why the value may fail to fit.
+#    Predicate {
+#        if (!($this->args['start'] <= $input)) {
+#            $message = $input . ' is less than ' . $this->args['start'];
+#            return false;
+#        }
+#        if (!($input < $this->args['end'])) {
+#            $message = $input . ' is not less than ' . $this->args['end'];
+#            return false;
+#        }
+#        return true;
+#    }
+# Note that it's OK to fill the $reason when the return value is `true`. XUA automatically clears the `$message` in that case.
+
+
+# #### Marshal and Unmarshal
+# Since the integers are possible to store and transmit, we can leave the marshal and unmarshal functions identity. But for the purpose of this documentation, we define a network transmit marshaling system, and leave the database store marshaling identity.
+
+# The silly idea is to shift starting number to zero to have smaller integers which are easier to transmit (it's not). For example The range $[1000, 1100)$ can be shifted to $[0, 100)$.
+#    Marshal<php> {
+#        return $input - $this->args['start'];
+#    }
+#    Unmarshal<php> {
+#        return $input + $this->args['start'];
+#    }
+#    Marshal<javascript> {
+#        return input - this.args.start;
+#    }
+#    Unmarshal<javascript> {
+#        return input + this.args.start;
+#    }
+
+# #### Database Type
+# This is an interesting part of the definition, since we can actually determine the length of MySQL `INT` by the range limits.
+
+# We know that `INT(n)` can store values in range $[-2^{n-1}, 2^{n-1}]$. So we need to find the least $n$ such that this range contains our range. First, we find the maximum absolute value that can fit in the type.
+#    $min = $this->args['start'];
+#    $max = $this->args['end'] - 1;
+#    $absMax = max(abs($min), abs($max));
+
+# Let's say this number is $M$. we must find $n$ such that $M \leq 2^{n-1}$.
+# $$\begin{eqnarray}
+# M \leq 2^{n-1} & \iff & \log_2(M) \leq n - 1 \\
+# (\text{Since $n - 1$ is integer}) & \iff & \lceil \log_2(M) \rceil \leq n - 1 \\
+# & \iff & \lceil \log_2(M) \rceil + 1 \leq n \\
+# \end{eqnarray}$$
+
+# Do the minimum value of $n$ is when $n = \lceil \log_2(M) \rceil + 1$.
+#    $n = ceil(log($absMax, 2)) + 1;
+
+# This leads us to the following `DatabaseType`.
+#    DatabaseType {
+#        $min = $this->args['start'];
+#        $max = $this->args['end'] - 1;
+#        $absMax = max(abs($min), abs($max));
+#        $n = ceil(log($absMax, 2)) + 1;
+#        return "INT($n)";
+#    }
+
+# #### Hierarchy
+# Assume that we want another super with same features, but only for positive values. We can just extend what we already have.
+
+# @python doc.renderComments = "pure"
+# Supers\Integers\PositiveRange
+Super extends Supers\Integers\Range () {
+    Validation {
+        if ($this->args['start] <= 0) {
+            throw new SuperValidationException('The range must be positive');
+        }
+        parent::validation();
+    }
+}
+# @python doc.renderComments = "doc"
+
+# Or assume we want a range super that can only start at zero.
+
+# @python doc.renderComments = "pure"
+# Supers\Integers\NaturalUpperLimit
+Super extends Supers\Integers\Range (
+    const start : Supers\Integers\Integer() = 0;
+) {}
+# @python doc.renderComments = "doc"
+
+# Note the way we overrode the `start` with default value, but also set it constant so the caller cannot change it.
+#    $type = new Supers\Integers\NaturalUpperLimit(['start' => 1, 'end' => 2]);
+# This code will result in uncaught `SuperValidationException`.
+
+# But better than these, assume we use the network transmit marshaling procedures for database which can really make an impact. And also remove the silly network transmit marshaling procedure. But we must override the `DatabaseType` as well.
+
+# @python doc.renderComments = "pure"
+# Supers\Integers\EfficientRange
+Super extends Supers\Integers\Range () {
+    Marshal<php> {
+        return $input;
+    }
+    Unmarshal<php> {
+        return $input;
+    }
+    Marshal<javascript> {
+        return $input;
+    }
+    Unmarshal<javascript> {
+        return $input;
+    }
+
+    Marshal<database> {
+        return $input - $this->args['start'];
+    }
+    Unmarshal<database> {
+        return $input + $this->args['start'];
+    }
+    DatabaseType {
+        $max = $this->args['end'] - $this->args['start'] - 1;
+        $n = ceil(log($max, 2)) + 1;
+        return "INT($n)";
+    }
+}
+# @python doc.renderComments = "doc"
+
+# Another example is when we want to add arguments to a super. For example assume we want an `step` argument. By default the step is one. but if we set step to three, then the type accepts `start` and every third number.
+
+# @python doc.renderComments = "pure"
+# Supers\Integers\StepRange
+Super extends Supers\Integers\Range (
+    step : Supers\Integers\Integer() = 1;
+) {
+    Validation {
+        parent::validation();
+        if (step < 1) {
+            throw new SuperValidationException('step must be at least 1.');
+        }
+    }
+    Predicate {
+        if (!parent::predicate($input, $message)) {
+            return false;
+        }
+        if ($input - $this->argument['start'] % $this->argument['step'] != 0) {
+            $message = "value {$input} minus starting point {$this->argument['start']} is not devisable by step value {$this->argument['step']}.";
+            return false;
+        }
+        return true;
+    }
+}
+# @python doc.renderComments = "doc"
+
+
+# ### Usage
+# After defining a super, we can use it to define types, and use them.
+
+# #### Inside PHP
+# First, Let's define a type that accepts the range $[10, 30)$. We use the `EfficientRange`.
+#    $type = new Supers\Integers\EfficientRange(['start' => 10, 'end' => 30]);
+
+# Let's see what how XUA stringifies this type.
+#    var_dump($type->toString());
+# This code dumps `Supers\Integers\EfficientRange(start = 10, end = 30)`.
+
+# The value `25` explicitly fits in the type, while the value `5` implicitly fits.
+#    $value = 25;
+#    var_dump($type->explicitlyAccepts($value)); # dumps true
+#    $value = 5;
+#    var_dump($type->implicitlyAccepts($value)); # dumps true
+
+# Of course the value `25` also fits in the type implicitly. This is because the function first checks if the value explicitly fits.
+#    $value = 25;
+#    var_dump($type->implicitlyAccepts($value)); # dumps true
+
+# We know value `15` is ambiguous. It can be interpreted as `15` itself, a value in range, or the result of marshaling `25`. Let's call accept and check the result.
+#    $value = 15;
+#    var_dump($type->accepts($value)); # dumps true
+#    var_dump($value); # dumps 15
+# Since the function first tries the explicit, if the value fits explicitly, function doesn't change the value. What about `5` that can only fit implicitly?
+#    $value = 5;
+#    var_dump($type->accepts($value)); # dumps true
+#    var_dump($value); # dumps 15
+# This time the function tries to fit the value explicitly and fails, so it goes for unamrshaling, which leads to accept.
+
+# We know the value $5$ doesn't fit explicitly, but we may wonder why. (It's super obvious but is a good way to see how to get the reason from the function.)
+#    $value = 5;
+#    var_dump($type->explicitlyAccepts($value, $reason)); # dumps false
+#    var_dump($reason); # dumps '5 is less than 10'
+# What about value `30`?
+#    $value = 30;
+#    var_dump($type->explicitlyAccepts($value, $reason)); # dumps false
+#    var_dump($reason); # dumps '30 is not less than 30'
+# But we know `30` doesn't even implicitly fit.
+#    $value = 30;
+#    var_dump($type->accepts($value, $reasons)); # dumps false
+#    var_dump($reasons);
+# This function fills the `$reasons` with an array, reasoning about each failure.
+#    [
+#        'identity' => '30 is not less than 30',
+#        'unmarshal' => '30 is not less than 30',
+#        'unmarshalDatabase' => '40 is not less than 30',
+#    ]
+# The `$reason` variable can work like a log, for example we try the code above with `5`, and get the following.
+#    [
+#        'identity' => '5 is less than 10',
+#        'unmarshal' => '5 is less than 10',
+#        'unmarshalDatabase' => null,
+#    ]
+# We can see there is no reason for the `unmarshalDatabase`, and it makes sense since the value fitted.
+
+# We know that the storing in the database is done by marshalling. The marshaled values are in $[0, 20)$.
+#    var_dump($type->DatabaseType()); # Dumps 'INT(6)'
+# In this case there is no efficiency since the original values would only need `6` bits to. Although we could make this better if we shifted the center of the range to zero instead of starting point. That way we would have range $[-10, 10)$ which needs only $5$ bits ro store. Any way none of this is useful because MySQL occupies at least a byte which is `8` bits. And there is no difference between `5` and `6` in practice. Although this method of marshaling may come handy for big values, XUA's official `Range` does not use it because of the ambiguity.
+
+
+# #### Inside XUA
+# We may use a super to define another super.
+# @python doc.renderComments = "pure"
+# Supers\Gender
+Super (
+    possibilities : Supers\Integers\Range(start = 2, end = 4) = 2;
+) {
+    Predicate {
+        $choices = ['male', 'female'];
+        if ($this->args['possibilities'] == 3) {
+            $choices = ['male', 'female', 'third'];
+        }
+
+        $message = '$input is not in ' . implode(", ", $choices);
+        return in_array($input, $choices);
+
+    }
+}
+# @python doc.renderComments = "doc"
+
+# Note how we set the `$message` without caring about the return value. XUA automatically clears the `$message` if the return value is `true`.
+
+# -- #########################################
+# # Good News
+# Although defining a simple super seems easy, defining a complete super with all features in many languages, seems exhausting. The good news is, XUA provides a set of predefined supers that cover almost any need. We discuss them in the next chapter. 

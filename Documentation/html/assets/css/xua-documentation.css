@@ -366,6 +366,9 @@ pre {
 code {
     background-color: #efefef;
     color: #1e1e1e;
+}
+
+:not(pre) > code {
     padding: 3px;
 }
 
@@ -965,4 +968,33 @@ a:active {
 
 a:hover {
     color: #001F00;
+}
+
+
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+table {
+    border-collapse: collapse;
+}
+
+.table-bordered thead td, .table-bordered thead th {
+    border-bottom-width: 2px;
+}
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+.table-bordered td, .table-bordered th {
+    border: 1px solid #dee2e6;
+}
+.table td, .table th {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
 }
