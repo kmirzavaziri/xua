@@ -1,0 +1,24 @@
+# {{FILE_PATH}}
+# Generated at {{DATE_TIME}}
+# By {{USER}}
+
+# This is a template method.
+public Method {
+    Request {
+		requestItemName1 : Text(nullable = true) = null; # First request item
+		requestItemName2 : Text(nullable = true) = null; # Second request item
+	}
+	Response {
+		responseItemName1 : Text(nullable = true) = null; # Concatenation of two request items
+		responseItemName2 : Trilean()             = null; # It's true if the length of concatenation is greater than 5, and null if some of inputs are null, otherwise false
+	}
+	Body {
+        $requestItem1 = $this->Q_requestItemName1;
+        $requestItem2 = $this->Q_requestItemName2;
+
+        if (requestItem1 and requestItem2) {
+            $this->responseItemName1 = requestItem1 . requestItem2;
+        }
+        $this->responseItemName2 = strlen($this->responseItemName1) > 5;
+    }
+}

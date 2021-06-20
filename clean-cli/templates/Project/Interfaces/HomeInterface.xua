@@ -1,0 +1,15 @@
+# Interfaces\HomeInterface
+# Generated at 1400-03-31 00:27:35
+# By kamyar
+
+use Services\XUA\TemplateService;
+use XUA\XUA;
+
+Interface {
+    $bind = [
+        'data' => [
+            'version' => XUA::VERSION
+        ]
+    ];
+    return TemplateService::render('home.twig', $bind);
+}

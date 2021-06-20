@@ -1,0 +1,9 @@
+# Interfaces\TestInterface
+# Generated at 1400-03-31 00:28:36
+# By kamyar
+
+use Services\XUA\ExpressionService;
+
+Interface {
+        return ExpressionService::get('hello.world');
+}

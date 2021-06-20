@@ -1,0 +1,9 @@
+# {{FILE_PATH}}
+# Generated at {{DATE_TIME}}
+# By {{USER}}
+
+# This is a template entity.
+Entity (
+    fieldName1 : Integer() = 42; # First field
+    fieldName2 : Integer() = 42; # Second field
+) {}

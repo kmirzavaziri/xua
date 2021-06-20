@@ -1,0 +1,8 @@
+{
+  "engine": "mysql",
+  "hostname": "HOSTNAME",
+  "port": 3306,
+  "database": "DATABASE",
+  "username": "USERNAME",
+  "password": "PASSWORD"
+}

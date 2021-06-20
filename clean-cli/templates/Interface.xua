@@ -1,0 +1,16 @@
+# {{FILE_PATH}}
+# Generated at {{DATE_TIME}}
+# By {{USER}}
+
+use Services\XUA\TemplateService;
+use XUA\XUA;
+
+# This is a template interface.
+Interface {
+    $bind = [
+        'data' => [
+            'version' => XUA::VERSION
+        ]
+    ];
+    return TemplateService::render('home.twig', $bind);
+}

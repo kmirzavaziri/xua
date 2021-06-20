@@ -1,0 +1,46 @@
+# Methods\XUA\DeployTest
+# Generated at 1400-03-31 00:37:51
+# By kamyar
+
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use Services\XUA\ConstantService;
+use Supers\Basics\Strings\Text;
+use XUA\Entity;
+use XUA\Tools\Entity\TableScheme;
+
+# This method is used in deploy procedure to perform tests before deploying, it also provides a list of database alters if there are some.
+Method {
+    Request {}
+
+    Response {
+        alters : Text(); # Database alters if some exist.
+    }
+
+    Body {
+        $entitiesIterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(ConstantService::ENTITIES_NAMESPACE));
+        $alters = [];
+        $newTables = [];
+        foreach ($entitiesIterator as $entityFile) {
+            if ($entityFile->isFile() && $entityFile->getExtension() == 'php') {
+                $entityFileName = $entityFile->getPathname();
+                $class = str_replace(
+                    '/',
+                    '\\',
+                    substr($entityFileName, 0, strlen($entityFileName) - 4)
+                );
+                if (is_a($class, Entity::class, true)) {
+                    $tableNamesAndAlter = $class::alter();
+                    $newTables = array_merge($newTables, $tableNamesAndAlter['tableNames']);
+                    if ($tableNamesAndAlter['alters']) {
+                        $alters[] = $tableNamesAndAlter['alters'];
+                    }
+                }
+            }
+        }
+
+        $alters[] = TableScheme::getDropTables($newTables);
+
+        $this->alters = implode(PHP_EOL . PHP_EOL, $alters);
+    }
+}

@@ -1,0 +1,20 @@
+# Entities\User
+# Generated at 1400-03-31 00:27:35
+# By kamyar
+
+use Supers\Basics\Highers\Date;
+use Supers\Basics\Strings\Enum;
+use Supers\Basics\Strings\Text;
+
+# This entity stores general users' information.
+Entity (
+    email       : Text(minLength = 1, maxLength = 254); # User's email address
+    phoneNumber : Text(minLength = 1, maxLength = 15);  # User's phone number
+    firstName   : Text(minLength = 1, maxLength = 200); # User's first name
+    lastName    : Text(minLength = 1, maxLength = 200); # User's last name
+    gender      : Enum(
+        values = ['male', 'female'],
+        nullable = true
+    );                                                  # User's gender
+    birthDate   : Date(nullable = true);                # User's birth date
+) {}

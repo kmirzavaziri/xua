@@ -1,0 +1,14 @@
+# {{FILE_PATH}}
+# Generated at {{DATE_TIME}}
+# By {{USER}}
+
+# This is a template super.
+Super (
+    argName1 : Universal() = null; # First argument
+    argName2 : Universal() = null; # Second argument
+) {
+    Predicate {
+        $message = 'Not implemented yet!';
+        return false;
+    }
+}
